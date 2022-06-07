@@ -33,17 +33,17 @@ function Home() {
 
 
   return (
-    <div className="flex justify-center rounded-1 bg-gray-100 p-2 place-items-center outline outline-1 ">
-      <form className="Large Wallets bg-gray-400 rounded min-w-min w-96 m-4 p-1" onSubmit={searchHandler}>
+    <div className="flex justify-center rounded-1 bg-gray-300 p-2 place-items-center ">
+      <form className="bg-white rounded-sm outline outline-1 min-w-min w-96 m-4 p-1" onSubmit={searchHandler}>
 
-        <div className="bg-white outline rounded outline-1 m-1 flex">
-          <label className="font-semibold m-1">Search for wallet by: </label>
-          <select className="outline outline-1 m-1">
+        <div className="Drop-Down bg-white rounded m-1 flex">
+          <label className="font-semibold m-1 mr-14">Search for wallet by: </label>
+          <select className="outline outline-1 rounded-sm m-1">
             <option> Hexidecimal Address</option>
           </select>
         </div>
 
-        <input className="m-2 mt-4 rounded bg-gray-100 w-96 drop-shadow"
+        <input className="Search-Bar m-2 my-4 rounded-sm outline outline-1 bg-gray-100 w-96 drop-shadow"
           type="text"
           value={null}
           placeholder=" Wallet Address"
