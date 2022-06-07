@@ -33,7 +33,7 @@ function Home() {
 
 
   return (
-    <div className="flex justify-center rounded bg-gray-100 p-2 place-items-center outline outline-1 ">
+    <div className="flex justify-center rounded-1 bg-gray-100 p-2 place-items-center outline outline-1 ">
       <form className="Large Wallets bg-gray-400 rounded min-w-min w-96 m-4 p-1" onSubmit={searchHandler}>
 
         <div className="bg-white outline rounded outline-1 m-1 flex">
