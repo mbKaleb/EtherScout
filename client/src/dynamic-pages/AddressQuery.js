@@ -10,7 +10,7 @@ export default function AddressQuery() {
 
 
   return (
-    <div className="justify-center rounded-1 bg-gray-400 p-2 w-2/3 min-w-fit">
+    <div className="justify-center rounded-1 bg-gray-400 p-2 w-screen min-w-max ">
       <div className="Address rounded-sm mx-12 font- bg-white drop-shadow p-2">{" Address: "+ walletAddress}</div>
       <div className="flex m-2 mx-12">
 
@@ -23,6 +23,22 @@ export default function AddressQuery() {
 
         <div className="grid-flex rounded-sm bg-white drop-shadow w-6/12 ml-2 p-4">
           <div className="mb-2 font-medium min-w-fit">Ethereum Naming Service (ENS)</div>
+
+
+          <div className="flex">
+
+            <div className="w-6/12 m-1">
+              <div className="border-b font-medium">Registrant</div>
+              <div>Test</div>
+            </div>
+
+            <div className="w-6/12 m-1">
+              <div className="border-b font-medium">Controller</div>
+              <div>Test</div>
+            </div>
+
+          </div>
+    
         </div>
 
       </div>
