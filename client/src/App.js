@@ -10,7 +10,7 @@ import Home from "./pages/Home";
 import WatchedWallets from "./pages/WatchedWallets";
 import WalletFinder from "./pages/WalletFinder"
 import Whales from "./pages/Whales";
-import Wallet from "./pages/Wallet";
+import AddressQuery from "./dynamic-pages/AddressQuery";
 
 import LogIn from "./pages/LogIn";
 import SignUp from "./pages/SignUp";
@@ -77,7 +77,7 @@ export default function App() {
           <Route path="" element={<Home />} />                          {/*Home Page*/}
           <Route path="watched-wallets" element={<WatchedWallets />} /> {/*Watched Wallets*/}
           <Route path="wallet-finder" element={<WalletFinder />} >      {/*Wallet Finder, Not Completed Yet*/}
-            <Route path=':walletAddress' element={<Wallet />} />
+            <Route path=':walletAddress' element={<AddressQuery />} />
           </Route>
           <Route path="whales" element={<Whales />} >
             {/* Whale user data  */}
