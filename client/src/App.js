@@ -77,7 +77,7 @@ export default function App() {
           <Route path="" element={<Home />} />                          {/*Home Page*/}
           <Route path="watched-wallets" element={<WatchedWallets />} /> {/*Watched Wallets*/}
           <Route path="wallet-finder" element={<WalletFinder />} >      {/*Wallet Finder, Not Completed Yet*/}
-            <Route path=':walletAddress' element={<AddressQuery />} />
+            <Route path=':walletAddress' element={<AddressQuery currentEthPrice={currentEthPrice}/>} />
           </Route>
           <Route path="whales" element={<Whales />} >
             {/* Whale user data  */}
