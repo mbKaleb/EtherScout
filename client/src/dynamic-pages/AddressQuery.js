@@ -17,25 +17,24 @@ export default function AddressQuery({currentEthPrice}) {
   const [ethBalance, setEthBalance] = useState(0);
   //ENS & controller data
   const [ensName, setEnsName] = useState(null);
-  const [resolverHex, setresolverHex] = useState(null); //ie: Controller Contract
+  const [resolverInstance, setResolverInstance] = useState(null); //ie: Controller Contract
   //Text* key-value data
   const [email, setEmail] = useState(null);
   
   //Ether Network and key
   const network = 'homestead';
-  const formatedEthBalance = () => { return ethers.utils.formatUnits(ethBalance, 'ether')}
   const provider = ethers.getDefaultProvider(network, {
     etherscan: '5JJTINSZ38FFRH9VRUDJXHTNW6W8SF3TFC',
   });
 
   //Async Hook Assignment
     //Returns the name associated with a hexidecimal address if reverse lookup is enabled
-  async function getEthNamespace(hexidecimalAddress) { 
+  async function getEthNamespace(hexidecimalAddress) {
     const nameString = await provider.lookupAddress(hexidecimalAddress);
     return nameString;
   }
-    //Takes an ENS and returns an unformatted eth balance
-  async function getBalance(nameString) { //
+    //Takes an ENS and returns an formatted eth balance
+  async function getBalance(nameString) {
     const balance = await provider.getBalance(nameString)
     const finalBalance = await ethers.utils.formatUnits(balance, 'ether')
     return finalBalance;
@@ -46,6 +45,11 @@ export default function AddressQuery({currentEthPrice}) {
       return resolver
   }
 
+  async function getEmailByResolver(resolver) {
+    const email = await resolver.getText('email');
+    console.log(email)
+    return email
+  }
 
   // const findEmailFromResolver = () => {
   //   resolveByName(walletAddress).then(resp => {
@@ -60,31 +64,34 @@ export default function AddressQuery({currentEthPrice}) {
   // }
 
   async function getData() {
+    
+    //Get ENS name from hexidecimal
+    let resp0 = await getEthNamespace(walletAddress)
+    setEnsName(resp0)
 
+    //Get balance of wallet
+    let resp1 = await getBalance(walletAddress)
+    setEthBalance(resp1)
 
-    let response = await getEthNamespace(walletAddress)
-    setEnsName(response)
+    // get email 
+    if (resolverInstance) { //exp
+      let resp = await getEmailByResolver(resolverInstance)
+      // console.log(resp)
+      console.log(resp.address)
+      setEmail(resp.address)
+    }
 
-// let response2 = await getBalance(walletAddress)
-// let balance = await response2
-// await setEthAddressData({...ethAddressData, 'ethBalance': balance})
-
-// let response3 = await resolveByName(ethAddressData.ens)
-// console.log(response3)
-// setEthAddressData({...ethAddressData, 'resolver': response3?.address})
-// .then(resp => {
-//   setEthAddressData({...ethAddressData, 'ens' : resp})})
-// await getBalance(walletAddress).then(resp => {
-//   setEthAddressData({...ethAddressData, 'ethBalance' : resp})})
-// await resolveByName(ethAddressData.ens).then(resp => {
-//   setEthAddressData({...ethAddressData, 'resolver' : resp.address})})
+    if (ensName) {
+      let resp = await resolveByName(ensName)
+      console.log(resp)
+      setResolverInstance(resp)
+    }
   }
 
   //On-Page-Load
   useEffect(() => {
     getData()
-
-  }, []);
+  }, [ensName]);
 
   return (
     <div className="justify-center rounded-1 bg-gray-400 p-2 w-screen min-w-max ">
@@ -92,8 +99,8 @@ export default function AddressQuery({currentEthPrice}) {
       <div className="flex m-2 mx-12">
         <div className="grid-flex rounded-sm bg-white drop-shadow w-6/12 mr-2 p-4 ">
           <div className="mb-2 font-medium">Overview</div>
-          <div className="flex border-b p-1"> <div className="grow">ETH Balance: </div>   <div >{walletAddress ? formatedEthBalance() +' ETH' : "Loading..."}</div> </div>
-          <div className="flex border-b p-1"> <div className="grow">USD Est. Value: </div>   <div >{ethBalance ? "$"+(Math.round((formatedEthBalance()*currentEthPrice) * 100) / 100).toFixed(2) : "Loading..."}</div></div>
+          <div className="flex border-b p-1"> <div className="grow">ETH Balance: </div>   <div >{walletAddress ? ethBalance +' ETH' : "Loading..."}</div> </div>
+          <div className="flex border-b p-1"> <div className="grow">USD Est. Value: </div>   <div >{ethBalance ? "$"+(Math.round((ethBalance*currentEthPrice) * 100) / 100).toFixed(2) : "Loading..."}</div></div>
           <div className="flex border-b p-1"> <div className="grow">Wallet Type</div>   <div>Unknown</div> </div>
         </div>
         <div className="[ENS Section]  grid-flex rounded-sm bg-white drop-shadow w-6/12 ml-2 p-4">
@@ -101,13 +108,13 @@ export default function AddressQuery({currentEthPrice}) {
           <div className="[LEFT SECTION] flex">
             <div className="w-6/12 m-1">
               <div className="border-b font-medium">Controller (contract)</div>
-              <div>{'resolver'}</div>
+              <div>{resolverInstance?.address || null}</div>
               <div className="border-b font-medium">Email</div>
-              <div>{'email' || 'No Record Found'}</div>
+              <div>{[email] || 'No Record Found'}</div>
             </div>
             <div className="w-6/12 m-1">
               <div className="border-b font-medium">Name</div>
-              <div>{'namespace'}</div>
+              <div>{ensName}</div>
             </div>
           </div>
         </div>
