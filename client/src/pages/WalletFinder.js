@@ -25,9 +25,7 @@ function Home() {
   //Fetch Assignments
   const handleInput = (e) => {
     const { name, value } = e.target;
-    console.log(name, value)
     setFormState(formState => ({ ...formState, [name]: value }))
-    console.log(formState)
   }
 
 
