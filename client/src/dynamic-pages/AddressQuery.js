@@ -12,89 +12,80 @@ export default function AddressQuery({currentEthPrice}) {
   const { walletAddress } = useParams();
 
   //State Assignment
-  const [ethAddressData, setEthAddressData] = useState({
-    "walletAddress": walletAddress
-  })
+    //Basic Address Data
+  const [ethBalance, setEthBalance] = useState(0);
+    //ENS & controller data
+  const [ensName, setEnsName] = useState(null);
+  const [resolverHex, setresolverHex] = useState(null); //ie: Controller Contract
+      //Text* key-value data
+  const [email, setEmail] = useState(null);
 
-  const [walletBalance, setWalletBalance] = useState(0);
-
-
-  //Ethers Assignemnt/Fetch
-  const url = `https://api.etherscan.io/api?module=account&action=balance&address=${walletAddress}&tag=latest&apikey=5JJTINSZ38FFRH9VRUDJXHTNW6W8SF3TFC`
-  const formatedEthBalance = () => { return ethers.utils.formatUnits(walletBalance, 'ether')}
-
+  //Ether Network and key
   const network = 'homestead';
   const provider = ethers.getDefaultProvider(network, {
     etherscan: '5JJTINSZ38FFRH9VRUDJXHTNW6W8SF3TFC',
   });
 
-  const walletFetch = (e) => {
-    fetch(url).then(r => r.json()).then(r => {
-      if (r.message === "OK") {
-        setWalletBalance(r.result)
-      } else {
-        setTimeout(() => walletFetch(), 500)
-      }})
-  }
-
-
   //Async Hook Assignment
-
     //Returns the name associated with a hexidecimal address if reverse lookup is enabled
   async function lookupAddress(hexidecimalAddress) { 
     const nameString = await provider.lookupAddress(hexidecimalAddress);
     return nameString;
   }
-
     //Takes an ENS and returns an unformatted eth balance
   async function getBalance(nameString) { //
     const balance = await provider.getBalance(nameString)
     const finalBalance = await ethers.utils.formatUnits(balance, 'ether')
     return finalBalance;
   }
-
     //Get resolver ens contract resolver by name
   async function resolveByName(address) {
-    try {
       const resolver = await provider.getResolver(address)
       return resolver
-    } catch (error) {
-      return null
-    }
   }
 
-  const findEmailFromResolver = () => {
-    resolveByName(walletAddress).then(resp => {
-      if(resp === 'OK'){
-        resp.getText('email').then(resp =>{
-          console.log(resp)
-          setEthAddressData({...ethAddressData, 'email': resp})
-        })
-      } else {
-        setEthAddressData({...ethAddressData, 'email': 'No Record Found'})
-      }
-    })
+
+  // const findEmailFromResolver = () => {
+  //   resolveByName(walletAddress).then(resp => {
+  //     if(resp === 'OK'){
+  //       resp.getText('email').then(resp =>{
+  //         setEthAddressData({...ethAddressData, 'email': resp})
+  //       })
+  //     } else {
+  //       setEthAddressData({...ethAddressData, 'email': 'No Record Found'})
+  //     }
+  //   })
+  // }
+
+  async function getData() {
+    
+
+    // let response = await lookupAddress(walletAddress)
+// let namesp = await response
+// setEthAddressData({...ethAddressData, 'ens': namesp})
+
+// let response2 = await getBalance(walletAddress)
+// let balance = await response2
+// await setEthAddressData({...ethAddressData, 'ethBalance': balance})
+
+// let response3 = await resolveByName(ethAddressData.ens)
+// console.log(response3)
+// setEthAddressData({...ethAddressData, 'resolver': response3?.address})
+// .then(resp => {
+//   setEthAddressData({...ethAddressData, 'ens' : resp})})
+// await getBalance(walletAddress).then(resp => {
+//   setEthAddressData({...ethAddressData, 'ethBalance' : resp})})
+// await resolveByName(ethAddressData.ens).then(resp => {
+//   setEthAddressData({...ethAddressData, 'resolver' : resp.address})})
   }
 
 
 
   //On-Page-Load
   useEffect(() => {
-    walletFetch();
+    
 
-    //Get Wallet Name
-    lookupAddress(walletAddress).then(resp => {
-      setEthAddressData({...ethAddressData, 'ens': resp})
-    }).then(
-      getBalance(walletAddress).then(resp => {
-        setEthAddressData({...ethAddressData, 'ethBalance':resp})
-      })
-    ).then(
-      findEmailFromResolver()
-      ).then(
-        console.log(ethAddressData)
-      )
-  }, [])
+  }, []);
 
 
 
@@ -118,15 +109,15 @@ export default function AddressQuery({currentEthPrice}) {
             <div className="w-6/12 m-1">
 
               <div className="border-b font-medium">Controller (contract)</div>
-              <div>Test</div>
+              <div>{ethAddressData?.resolver}</div> 
 
               <div className="border-b font-medium">Email</div>
-              <div>{ethAddressData?.email}</div>
+              <div>{ethAddressData?.email || 'No Record Found'}</div>
 
             </div>
             <div className="w-6/12 m-1">
               <div className="border-b font-medium">Name</div>
-              <div>Test</div>
+              <div>{ethAddressData?.ens}</div>
             </div>
           </div>
         </div>
@@ -136,3 +127,22 @@ export default function AddressQuery({currentEthPrice}) {
     </div>
   )
 }
+
+
+// let response = await lookupAddress(walletAddress)
+// let namesp = await response
+// setEthAddressData({...ethAddressData, 'ens': namesp})
+
+// let response2 = await getBalance(walletAddress)
+// let balance = await response2
+// await setEthAddressData({...ethAddressData, 'ethBalance': balance})
+
+// let response3 = await resolveByName(ethAddressData.ens)
+// console.log(response3)
+// setEthAddressData({...ethAddressData, 'resolver': response3?.address})
+// .then(resp => {
+//   setEthAddressData({...ethAddressData, 'ens' : resp})})
+// await getBalance(walletAddress).then(resp => {
+//   setEthAddressData({...ethAddressData, 'ethBalance' : resp})})
+// await resolveByName(ethAddressData.ens).then(resp => {
+//   setEthAddressData({...ethAddressData, 'resolver' : resp.address})})
