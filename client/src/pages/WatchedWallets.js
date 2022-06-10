@@ -48,7 +48,6 @@ export default function WatchedWallets() {
       <div className="( Your-Wallets ) bg-gray-100 outline outline-1 outline-blue-300 rounded min-w-min w-64 m-4">
         <>
         <div className="rounded bg-white  p-4 text-blue-800 font-semibold"> <button className="text-purple-600 outline outline-2 outline-purple-400 p-1 rounded mr-16" onClick={toggleFormHandler}>New Wallet</button> Your Watched Wallets  </div> 
-        
         </>
         {isLoggedIn() ? currentUser.custom_wallets.map((userWallet) => { return <EditWalletCard wallet={userWallet} /> }) : null} {/* Monitor the isLoggedIn logic, could cause bugs later*/}
       </div>

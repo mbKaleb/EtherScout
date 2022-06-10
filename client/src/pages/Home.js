@@ -14,7 +14,6 @@ export default function Home() {
   //Local State
   const [currentUser, currentEthPrice] = useOutletContext();
 
-
   return (
     <div className={PageStyles}>
       <ContentPreview1 currentUser={currentUser} currentEthPrice={currentEthPrice}/>

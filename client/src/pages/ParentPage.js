@@ -57,11 +57,9 @@ export default function ParentPage({ currentUser, setCurrentUser, currentEthPric
   const navigateTailwind = () => {
     window.location.replace('https://tailwindcss.com')
   }
-
   const navigateEthersJs = () => {
     window.location.replace('https://docs.ethers.io/v5/')
   }
-
   const navigateReact = () => {
     window.location.replace('https://reactjs.org/')
   }

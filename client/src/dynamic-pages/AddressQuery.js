@@ -89,13 +89,13 @@ export default function AddressQuery({currentEthPrice}) {
           <div className="[LEFT SECTION] flex">
             <div className="w-6/12 m-1">
               <div className="border-b font-medium">Controller (contract)</div>
-              <div>{resolverInstance?.address || null}</div>
+              <div>{resolverInstance?.address || "Invalid Request"}</div>
               <div className="border-b font-medium">Email</div>
-              <div>{email}</div>
+              <div>{email || 'No Record'}</div>
             </div>
             <div className="w-6/12 m-1">
               <div className="border-b font-medium">Name</div>
-              <div>{ensName}</div>
+              <div>{ensName || "No Record"}</div>
             </div>
           </div>
         </div>
