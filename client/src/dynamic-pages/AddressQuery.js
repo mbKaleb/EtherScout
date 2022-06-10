@@ -10,18 +10,16 @@ export default function AddressQuery({currentEthPrice}) {
   //Hook Assignment
   const { walletAddress } = useParams();
 
-  
-  
   //State Assignment
-  //Basic Address Data
+    //Basic Address Data
   const [ethBalance, setEthBalance] = useState(0);
-  //ENS & controller data
+    //ENS & controller data
   const [ensName, setEnsName] = useState(null);
-  const [resolverInstance, setResolverInstance] = useState(null); //ie: Controller Contract
-  //Text* key-value data
+  const [resolverInstance, setResolverInstance] = useState(null);
+    //Text* key-value data
   const [email, setEmail] = useState(null);
-  
-  //Ether Network and key
+
+    //Ether Network and key
   const network = 'homestead';
   const provider = ethers.getDefaultProvider(network, {
     etherscan: '5JJTINSZ38FFRH9VRUDJXHTNW6W8SF3TFC',
@@ -50,20 +48,7 @@ export default function AddressQuery({currentEthPrice}) {
     return email
   }
 
-  // const findEmailFromResolver = () => {
-  //   resolveByName(walletAddress).then(resp => {
-  //     if(resp === 'OK'){
-  //       resp.getText('email').then(resp =>{
-  //         setEthAddressData({...ethAddressData, 'email': resp})
-  //       })
-  //     } else {
-  //       setEthAddressData({...ethAddressData, 'email': 'No Record Found'})
-  //     }
-  //   })
-  // }
-
   async function getData() {
-  console.log('getting data')    
     //Get ENS name from hexidecimal
     let resp0 = await getEthNamespace(walletAddress)
     setEnsName(resp0)
@@ -118,22 +103,3 @@ export default function AddressQuery({currentEthPrice}) {
     </div>
   )
 }
-
-
-// let response = await lookupAddress(walletAddress)
-// let namesp = await response
-// setEthAddressData({...ethAddressData, 'ens': namesp})
-
-// let response2 = await getBalance(walletAddress)
-// let balance = await response2
-// await setEthAddressData({...ethAddressData, 'ethBalance': balance})
-
-// let response3 = await resolveByName(ethAddressData.ens)
-// console.log(response3)
-// setEthAddressData({...ethAddressData, 'resolver': response3?.address})
-// .then(resp => {
-//   setEthAddressData({...ethAddressData, 'ens' : resp})})
-// await getBalance(walletAddress).then(resp => {
-//   setEthAddressData({...ethAddressData, 'ethBalance' : resp})})
-// await resolveByName(ethAddressData.ens).then(resp => {
-//   setEthAddressData({...ethAddressData, 'resolver' : resp.address})})
