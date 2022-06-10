@@ -47,7 +47,6 @@ export default function AddressQuery({currentEthPrice}) {
 
   async function getEmailByResolver(resolver) {
     const email = await resolver.getText('email');
-    console.log(email)
     return email
   }
 
@@ -64,7 +63,7 @@ export default function AddressQuery({currentEthPrice}) {
   // }
 
   async function getData() {
-    
+  console.log('getting data')    
     //Get ENS name from hexidecimal
     let resp0 = await getEthNamespace(walletAddress)
     setEnsName(resp0)
@@ -76,14 +75,11 @@ export default function AddressQuery({currentEthPrice}) {
     // get email 
     if (resolverInstance) { //exp
       let resp = await getEmailByResolver(resolverInstance)
-      // console.log(resp)
-      console.log(resp.address)
-      setEmail(resp.address)
+      setEmail(resp)
     }
 
-    if (ensName) {
+    if (ensName && !resolverInstance) {
       let resp = await resolveByName(ensName)
-      console.log(resp)
       setResolverInstance(resp)
     }
   }
@@ -91,7 +87,7 @@ export default function AddressQuery({currentEthPrice}) {
   //On-Page-Load
   useEffect(() => {
     getData()
-  }, [ensName]);
+  }, [ensName, resolverInstance]);
 
   return (
     <div className="justify-center rounded-1 bg-gray-400 p-2 w-screen min-w-max ">
@@ -110,7 +106,7 @@ export default function AddressQuery({currentEthPrice}) {
               <div className="border-b font-medium">Controller (contract)</div>
               <div>{resolverInstance?.address || null}</div>
               <div className="border-b font-medium">Email</div>
-              <div>{[email] || 'No Record Found'}</div>
+              <div>{email}</div>
             </div>
             <div className="w-6/12 m-1">
               <div className="border-b font-medium">Name</div>
