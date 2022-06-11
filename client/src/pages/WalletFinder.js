@@ -5,6 +5,8 @@ import { useState } from "react";
 import { useNavigate, Outlet } from "react-router-dom";
 
 
+
+
 function Home() {
 
   //Hook Assignment
@@ -41,22 +43,29 @@ function Home() {
   //Query Validatiors
   const hexidecimalSearchValidator = (e) => {
     e.preventDefault();
+    if (formState.walletaddress.length !== 42 ){
+      setErrorDisplay("Invalid Address")
+    } else {  
+      searchHandler(e)
+    }
   }
 
   //Quesry Controller
-  const queryCotroller = () => {
+  const queryCotroller = (e) => {
+
+    //Hexidecimal Validator
     if (optionSelector === "hexidecimal") {
-      if (formState.walletaddress.length !== 16){
-        setErrorDisplay("Invalid Hex-Address")
-      }
+      hexidecimalSearchValidator(e)
     }
+
   }
 
   return (
     <div className="flex justify-center rounded-1 bg-gray-300 p-2">
 
     {isSearchbox ? (
-      <form className="bg-white rounded-sm outline outline-1 min-w-min h-32 w-96 m-4 p-1" onSubmit={hexidecimalSearchValidator}>
+      <form className="bg-white rounded-sm outline outline-1 min-w-min h-32 w-96 m-4 p-1" onSubmit={queryCotroller}>
+
         <div className="Drop-Down bg-white rounded m-1 mt-2 flex">
           <label className="font-semibold m-1 mr-14">Search for wallet by: </label>
           <select className="outline outline-1 rounded-sm m-0.5" onChange={handleOptionChange} value={this}>
@@ -69,6 +78,10 @@ function Home() {
           name="walletaddress"
           onChange={handleInput}
         />
+        <>
+          <div className="text-red-600 ml-2">{errorDisplay}</div>
+        </>
+
       </form>
     ) : (
       <Outlet />
