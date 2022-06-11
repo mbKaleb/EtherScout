@@ -32,18 +32,24 @@ export default function Sidebar({ isSidebarActive, currentUser }) {
   const purpleButtonStyles = 'Computed:( m-1 w-56 h-8 ) Styles:( rounded outline outline-1 outline-gray-600 drop-shadow-lg bg-purple-600 text-lg  text-white )'
   const blueButtonStyles =   'Computed:( m-1 w-56 h-8 ) Styles:( rounded outline outline-1 outline-gray-600 drop-shadow-lg bg-blue-500   text-lg  text-white )'
 
-  const newStyles
+  const newStyles = 'Computed:( m-1 ml-2 w-52 h-8 ) Styles:( rounded-sm outline outline-1 outline-gray-300 drop-shadow-lg bg-blue-700 text-xl font-light  text-white text-left pl-3 )'
+  const filterStyles = null;
 
 
     if (isSidebarActive) {
       return (
-        <div className='(Sidebar Parent) Computed:( h-64 p-1 z-40  left-0 ) Style:( w-60 bg-gray-100 ) absolute top-10 ' >
-          <button className={isLoggedIn() ? blueButtonStyles : purpleButtonStyles } name={'/'} onClick={navigateHandler} > Home </button>
-          {isLoggedIn() ? <button className={purpleButtonStyles} name={'/watched-wallets'} onClick={navigateAuthorizedUser} > Watched Wallets </button> : null}
-          <button className={blueButtonStyles} name={'/wallet-finder'} onClick={navigateHandler} > Wallet Finder </button>
-          <button className={blueButtonStyles} name={'/wallet-finder'} onClick={navigateHandler} > Address Analyzer </button>
-          <button className={purpleButtonStyles} name={'/whales'} onClick={navigateHandler} > About </button>
-        </div>)
+      <div className='(Sidebar Parent) Computed:( h-64 p-1 z-40  left-0 ) Style:( w-60 bg-gray-100 ) absolute top-10 outline outline-1 p-2 ' >
+        <button className={isLoggedIn() ? newStyles : newStyles } name={'/'} onClick={navigateHandler} > Home </button>
+        {isLoggedIn() ? <button className={newStyles} name={'/watched-wallets'} onClick={navigateAuthorizedUser} > Watched Wallets </button> : null}
+        <input 
+        className=" outline outline-2 outline-gray-700 m-2 w-11/12 p-0.5 pl-1 ml-2.5"
+        placeholder="Filter"
+        />
+        <div className="border  m-1" />
+        <button className={newStyles} name={'/wallet-finder'} onClick={navigateHandler} > Wallet Finder </button>
+        <button className={newStyles} name={'/wallet-finder'} onClick={navigateHandler} > Address Analyzer </button>
+        <button className={newStyles} name={'/whales'} onClick={navigateHandler} > About </button>
+      </div>)
     } else {
       return (
         <></>
