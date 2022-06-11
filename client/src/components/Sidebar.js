@@ -29,8 +29,10 @@ export default function Sidebar({ isSidebarActive, currentUser }) {
   }
 
   //Styles Assignment
-  const purpleButtonStyles = 'Computed:( m-1 w-56 h-8) Styles:( rounded outline outline-1 outline-gray-600 drop-shadow-lg bg-purple-600 text-lg  text-white )'
-  const blueButtonStyles = 'Computed:( m-1 w-56 h-8 ) Styles:( rounded outline outline-1 outline-gray-600 drop-shadow-lg bg-blue-500   text-lg  text-white )'
+  const purpleButtonStyles = 'Computed:( m-1 w-56 h-8 ) Styles:( rounded outline outline-1 outline-gray-600 drop-shadow-lg bg-purple-600 text-lg  text-white )'
+  const blueButtonStyles =   'Computed:( m-1 w-56 h-8 ) Styles:( rounded outline outline-1 outline-gray-600 drop-shadow-lg bg-blue-500   text-lg  text-white )'
+
+  const newStyles
 
 
     if (isSidebarActive) {
@@ -38,7 +40,8 @@ export default function Sidebar({ isSidebarActive, currentUser }) {
         <div className='(Sidebar Parent) Computed:( h-64 p-1 z-40  left-0 ) Style:( w-60 bg-gray-100 ) absolute top-10 ' >
           <button className={isLoggedIn() ? blueButtonStyles : purpleButtonStyles } name={'/'} onClick={navigateHandler} > Home </button>
           {isLoggedIn() ? <button className={purpleButtonStyles} name={'/watched-wallets'} onClick={navigateAuthorizedUser} > Watched Wallets </button> : null}
-          <button className={blueButtonStyles} name={'/wallet-finder'} onClick={navigateHandler} > Wallet-Finder </button>
+          <button className={blueButtonStyles} name={'/wallet-finder'} onClick={navigateHandler} > Wallet Finder </button>
+          <button className={blueButtonStyles} name={'/wallet-finder'} onClick={navigateHandler} > Address Analyzer </button>
           <button className={purpleButtonStyles} name={'/whales'} onClick={navigateHandler} > About </button>
         </div>)
     } else {
