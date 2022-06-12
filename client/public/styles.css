@@ -608,6 +608,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   height: 100vh;
 }
 
+.h-custom {
+  height: 83%;
+}
+
 .min-h-min {
   min-height: -webkit-min-content;
   min-height: min-content;
