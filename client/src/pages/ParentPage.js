@@ -1,6 +1,6 @@
 
 //React Imports
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useNavigate, Outlet } from 'react-router-dom'
 
 //Icons
@@ -69,16 +69,16 @@ export default function ParentPage({ currentUser, setCurrentUser, currentEthPric
 
 
   //Styles
-  const logoStyles = 'Computed:(  ml-2 w-36 h-8 px-2 ) Styles:( rounded-sm bg-blue-800 text-xl font-light text-white text-center )'
+  const logoStyles = 'Computed:(  ml-2 w-36 h-8 px-2 ) Styles:( rounded-sm bg-blue-600 text-2xl font-light text-white text-center )'
   const dropDownButtonStyles = 'computed:( ml-4 w-48 h-8 pl-2 )  styles:( rounded-sm outline outline-1 outline-gray-300 bg-blue-800 text-xl font-light text-white text-left )'
 
   const logInBttnStyles = 'rounded-sm outline outline-2 outline-blue-600 bg-white font-bold text-blue-600 mr-2 w-32'
-  const signUpBtnStyles = 'rounded-sm outline outline-2 outline-blue-600 bg-white font-bold text-blue-600 mr-2 w-32'
+  const signUpBtnStyles = 'rounded-sm outline outline-2 outline-blue-700 bg-blue-700 font-bold text-white mr-2 w-32'
 
 
   return (
     <div className='bg-gray-300'>
-      <div className='bg-gray-100 p-2 top-11 w-full sticky top-0 outline outline-blue-500 z-50 h-12 flex'>
+      <div className='bg-gray-100 p-2 top-11 w-full sticky top-0 outline outline-blue-700 z-50 h-12 flex'>
         <button className={logoStyles} onClick={navigateHome} > EtherScout </button>
         <button className={dropDownButtonStyles} onClick={toggleSidebar}>Home V</button>
         <div className='grow'></div>

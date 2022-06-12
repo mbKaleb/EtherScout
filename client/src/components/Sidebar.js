@@ -33,10 +33,10 @@ export default function Sidebar({ isSidebarActive, currentUser, toggleSidebar })
 
     if (isSidebarActive) {
       return (
-      <div className='computed:( h-fit z-40 absolute top-1 left-44 w-48 ) style:( bg-gray-100 outline outline-4 outline-gray-100 rounded-sm )'>
+      <div className='computed:( h-fit z-40 absolute top-1 left-44 w-48 ) style:( bg-gray-100 outline outline-2 outline-gray-100 rounded-sm drop-shadow-xl )'>
         <button className={blueButton} name={'/'} onClick={toggleSidebar} > Home </button>
         <button className={blueButton} name={'/technologies'} onClick={navigateHandler} > Technologies </button>
-        <input className="border border-black rounded-sm text-lg font-light outline-gray-600 w-full my-1 " placeholder="Filter" />
+        <input className="border border-black rounded-sm text-lg font-light outline-gray-600 ml-2 w-11/12 my-1 " placeholder="Filter" />
         <div className="border m-1" />
         <button className={blueButton} name={'/wallet-finder'} onClick={navigateHandler} > Wallet Finder </button>
         <button className={blueButton} name={'/wallet-finder'} onClick={navigateHandler} > Address Analyzer </button>
