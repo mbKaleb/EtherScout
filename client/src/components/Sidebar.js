@@ -29,36 +29,25 @@ export default function Sidebar({ isSidebarActive, currentUser, toggleSidebar })
   }
 
   //Styles Assignment
-  const purpleButtonStyles = 'Computed:( m-1 w-56 h-8 ) Styles:( rounded outline outline-1 outline-gray-600 drop-shadow-lg bg-purple-600 text-lg  text-white )'
-  const blueButtonStyles =   'Computed:( m-1 w-56 h-8 ) Styles:( rounded outline outline-1 outline-gray-600 drop-shadow-lg bg-blue-500   text-lg  text-white )'
-
-  const newStyles = 'Computed:( m-1 ml-2 w-11/12 h-8 ) Styles:( rounded-sm outline outline-1 outline-gray-300 drop-shadow-lg bg-blue-800 text-xl font-light  text-white text-left pl-3 )'
-  const filterStyles = null;
-
+  const newStyles = 'Computed:( w-full h-8 my-1 pl-3 ) Styles:( rounded-sm outline outline-1 outline-gray-300 bg-blue-800 ) text/font: ( text-xl font-light text-white text-left )'
 
     if (isSidebarActive) {
       return (
-      <div className='(Sidebar Parent) Computed:( h-fit p-1 z-40   ) Style:( w-52 bg-gray-100 ) absolute ( top-12 left-40 outline outline-1 p-2 rounded-sm ) ' >
-        <button className={isLoggedIn() ? newStyles : newStyles } name={'/'} onClick={toggleSidebar} > Home </button>
-        {/* <button className={isLoggedIn() ? newStyles : newStyles } name={'/'} onClick={navigateHandler} > Home </button> */}
+      <div className='computed:( h-fit z-40 absolute top-1 left-44 w-48 ) style:( bg-gray-100 outline outline-4 outline-gray-100 rounded-sm )'>
+        <button className={newStyles} name={'/'} onClick={toggleSidebar} > Home </button>
         <button className={newStyles} name={'/technologies'} onClick={navigateHandler} > Techologies </button>
-
-
-        {isLoggedIn() ? <button className={newStyles} name={'/watched-wallets'} onClick={navigateAuthorizedUser} > Watched Wallets </button> : null}
-
-        <input
-        className="outline outline-2 rounded-sm text-lg font-light outline-gray-600 m-2 w-11/12 pl-1 ml-2.5"
-        placeholder="Filter"
-        />
-
-        <div className="border  m-1" />
+        <input className="border border-black rounded-sm text-lg font-light outline-gray-600 w-full my-1 " placeholder="Filter" />
+        <div className="border m-1" />
         <button className={newStyles} name={'/wallet-finder'} onClick={navigateHandler} > Wallet Finder </button>
         <button className={newStyles} name={'/wallet-finder'} onClick={navigateHandler} > Address Analyzer </button>
-        <button className={newStyles} name={'/whales'} onClick={navigateHandler} > About </button>
-      </div>)
+      </div> )
     } else {
       return (
         <></>
-      )
+        )
+      }
     }
-}
+
+    {/* <button className={isLoggedIn() ? newStyles : newStyles } name={'/'} onClick={navigateHandler} > Home </button> */}
+    {/* {isLoggedIn() ? <button className={newStyles} name={'/watched-wallets'} onClick={navigateAuthorizedUser} > Watched Wallets </button> : null} */}
+    {/* <button className={newStyles} name={'/whales'} onClick={navigateHandler} > About </button> */}
