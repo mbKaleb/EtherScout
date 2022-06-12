@@ -676,6 +676,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   min-width: min-content;
 }
 
+.min-w-md {
+  min-width: -webkit-min-content;
+  min-width: 640px;
+}
+
 .max-w-lg {
   max-width: 32rem;
 }
