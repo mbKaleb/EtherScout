@@ -21,6 +21,7 @@ export default function Sidebar({ isSidebarActive, currentUser, toggleSidebar })
   //Navigate to endpoint based on the button 'name' data
   const navigateHandler = (e) => {
     navigate(e.target.name)
+    toggleSidebar()
   }
   const navigateAuthorizedUser = (e) => {
     if (isLoggedIn) {
