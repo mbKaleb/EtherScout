@@ -29,17 +29,17 @@ export default function Sidebar({ isSidebarActive, currentUser, toggleSidebar })
   }
 
   //Styles Assignment
-  const newStyles = 'Computed:( w-full h-8 my-1 pl-3 ) Styles:( rounded-sm outline outline-1 outline-gray-300 bg-blue-800 ) text/font: ( text-xl font-light text-white text-left )'
+  const blueButton = 'Computed:( w-full h-8 my-1 pl-2 ) Styles:( rounded-sm outline outline-1 outline-gray-300 bg-blue-800 ) text/font: ( text-xl font-light text-white text-left )'
 
     if (isSidebarActive) {
       return (
       <div className='computed:( h-fit z-40 absolute top-1 left-44 w-48 ) style:( bg-gray-100 outline outline-4 outline-gray-100 rounded-sm )'>
-        <button className={newStyles} name={'/'} onClick={toggleSidebar} > Home </button>
-        <button className={newStyles} name={'/technologies'} onClick={navigateHandler} > Techologies </button>
+        <button className={blueButton} name={'/'} onClick={toggleSidebar} > Home </button>
+        <button className={blueButton} name={'/technologies'} onClick={navigateHandler} > Technologies </button>
         <input className="border border-black rounded-sm text-lg font-light outline-gray-600 w-full my-1 " placeholder="Filter" />
         <div className="border m-1" />
-        <button className={newStyles} name={'/wallet-finder'} onClick={navigateHandler} > Wallet Finder </button>
-        <button className={newStyles} name={'/wallet-finder'} onClick={navigateHandler} > Address Analyzer </button>
+        <button className={blueButton} name={'/wallet-finder'} onClick={navigateHandler} > Wallet Finder </button>
+        <button className={blueButton} name={'/wallet-finder'} onClick={navigateHandler} > Address Analyzer </button>
       </div> )
     } else {
       return (
