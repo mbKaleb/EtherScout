@@ -4,7 +4,7 @@
 import { useNavigate } from "react-router-dom"
 
 
-export default function Sidebar({ isSidebarActive, currentUser }) {
+export default function Sidebar({ isSidebarActive, currentUser, toggleSidebar }) {
 
   //UseNavigate hook assignment
   const navigate = useNavigate();

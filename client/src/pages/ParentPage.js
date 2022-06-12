@@ -91,7 +91,7 @@ export default function ParentPage({ currentUser, setCurrentUser, currentEthPric
             </div>)
           }
         </div>
-        <Sidebar isSidebarActive={isSidebarActive} currentUser={currentUser} setCurrentUser={setCurrentUser} />
+        <Sidebar isSidebarActive={isSidebarActive} currentUser={currentUser} toggleSidebar={toggleSidebar} />
       </div>
 
       <Outlet context={[currentUser, currentEthPrice]} />
