@@ -20,6 +20,7 @@ import PageNotFound from "./pages/PageNotFound";
 
 // Style Sheet
 import './App.css';
+import Technologies from "./pages/Technologies";
 
 
 export default function App() {
@@ -76,6 +77,8 @@ export default function App() {
         <Route path="/" element={<ParentPage currentUser={currentUser} setCurrentUser={setCurrentUser} currentEthPrice={currentEthPrice} />}> {/*Parent Route/Source */}
           <Route path="" element={<Home />} />                          {/*Home Page*/}
           <Route path="watched-wallets" element={<WatchedWallets />} /> {/*Watched Wallets*/}
+          <Route path="technologies" element={<Technologies />} />      {/*Technologies*/}
+
           <Route path="wallet-finder" element={<WalletFinder />} >      {/*Wallet Finder, Not Completed Yet*/}
             <Route path=':walletAddress' element={<AddressQuery currentEthPrice={currentEthPrice}/>} />
           </Route>
