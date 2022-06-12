@@ -38,9 +38,9 @@ export default function Sidebar({ isSidebarActive, currentUser, toggleSidebar })
 
     if (isSidebarActive) {
       return (
-      <div className='(Sidebar Parent) Computed:( h-fit p-1 z-40   ) Style:( w-52 bg-gray-100 ) absolute ( top-1 left-24 outline outline-1 p-2 rounded-sm ) ' >
-        <button className={isLoggedIn() ? newStyles : newStyles } name={'/'} onClick={navigateHandler} > Home </button>
-        <button className={isLoggedIn() ? newStyles : newStyles } name={'/'} onClick={navigateHandler} > Home </button>
+      <div className='(Sidebar Parent) Computed:( h-fit p-1 z-40   ) Style:( w-52 bg-gray-100 ) absolute ( top-12 left-40 outline outline-1 p-2 rounded-sm ) ' >
+        <button className={isLoggedIn() ? newStyles : newStyles } name={'/'} onClick={toggleSidebar} > Home </button>
+        {/* <button className={isLoggedIn() ? newStyles : newStyles } name={'/'} onClick={navigateHandler} > Home </button> */}
         <button className={newStyles} name={'/technologies'} onClick={navigateHandler} > Techologies </button>
 
 

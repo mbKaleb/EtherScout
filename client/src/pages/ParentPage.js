@@ -75,9 +75,8 @@ export default function ParentPage({ currentUser, setCurrentUser, currentEthPric
 
       <div className='bg-gray-100 p-2 top-11 w-full sticky top-0 outline outline-blue-500 z-50 h-12 flex'>
 
-        <p className={logoStyles} > EtherScout </p> {/* test */}
-
-        <button className='outline outline-2 bg-white text-center w-36 rounded p-1 justify-left mr-12' onClick={toggleSidebar}> <BsStack style={{ color: "black", fontSize: "1.2em" }} /> </button>
+        <p className={logoStyles} > EtherScout </p>
+        <button className='computed:( ml-4 w-44 h-8 pl-2 )  styles:( rounded-sm outline outline-1 outline-grat-300 bg-blue-800 text-xl font-light text-white text-left )' onClick={toggleSidebar}>Home </button>
         <div className='grow'></div>
         <div className='h-max float-right justify-self-right mt-1 ml-8 z-50 w-42'>
           {!isLoggedIn() ? (<>
