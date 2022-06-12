@@ -65,17 +65,21 @@ export default function ParentPage({ currentUser, setCurrentUser, currentEthPric
   }
 
 
+  //Styles
+  const logoStyles = 'Computed:(  ml-2 w-36 h-8 px-2 ) Styles:( rounded-sm outline outline-1 outline-gray-300 drop-shadow-lg bg-blue-800 text-xl font-light text-white text-center m-0 )'
+
+
   return (
-    <div className='bg-gray-300 relative h-screen '>
 
-      <div className='bg-gray-100 p-2 top-11 w-full sticky top-0 outline outline-blue-500 z-50 grid grid-rows-1 grid-flow-col gap-12 h-10'>
+    <div className='bg-gray-300 relative h-screen'>
 
-        <button className='outline outline-2 bg-white text-center w-7 rounded p-1' onClick={toggleSidebar}><BsStack style={{ color: "black", fontSize: "1.2em" }} /></button>
-        <button className='flex text-justify  w-fit' onClick={navigateReact}>{<FaReact className='m-1' style={{ color: "blue" }} />}React{<FaReact className='m-1' style={{ color: "blue" }} />}</button>
-        <button className='flex text-justify  w-fit' onClick={navigateEthersJs}>{<FaEthereum className='m-1' />}EthersJS{<FaEthereum className='m-1' />}</button>
-        <button className='flex text-justify  w-fit' onClick={navigateTailwind}>{<SiTailwindcss className='m-1' style={{ color: ' #57bfff' }} />}Tailwind{<SiTailwindcss className='m-1' style={{ color: ' #57bfff' }} />}</button>
+      <div className='bg-gray-100 p-2 top-11 w-full sticky top-0 outline outline-blue-500 z-50 h-12 flex'>
 
-        <div className='h-max  float-right ml-8 justify-self-right z-50'>
+        <p className={logoStyles} > EtherScout </p> {/* test */}
+
+        <button className='outline outline-2 bg-white text-center w-36 rounded p-1 justify-left mr-12' onClick={toggleSidebar}> <BsStack style={{ color: "black", fontSize: "1.2em" }} /> </button>
+        <div className='grow'></div>
+        <div className='h-max float-right justify-self-right mt-1 ml-8 z-50 w-42'>
           {!isLoggedIn() ? (<>
             <button className='rounded-sm outline outline-2 outline-blue-600 bg-white font-bold text-blue-600 mr-2 w-32' onClick={callLogInForm}>Log In</button>
             <button className='rounded-sm outline outline-2 outline-blue-700 bg-blue-700 font-semibold text-white w-32' onClick={callSignUpForm}>Sign Up</button>
@@ -87,7 +91,7 @@ export default function ParentPage({ currentUser, setCurrentUser, currentEthPric
             </div>)
           }
         </div>
-        <Sidebar isSidebarActive={isSidebarActive} currentUser={currentUser} />
+        <Sidebar isSidebarActive={isSidebarActive} currentUser={currentUser} setCurrentUser={setCurrentUser} />
       </div>
 
       <Outlet context={[currentUser, currentEthPrice]} />
@@ -95,3 +99,9 @@ export default function ParentPage({ currentUser, setCurrentUser, currentEthPric
     </div>
   )
 }
+
+
+{/* Saved for later
+<button className='flex text-justify  w-fit' onClick={navigateReact}>{<FaReact className='m-1' style={{ color: "blue" }} />}React{<FaReact className='m-1' style={{ color: "blue" }} />}</button>
+<button className='flex text-justify  w-fit' onClick={navigateEthersJs}>{<FaEthereum className='m-1' />}EthersJS{<FaEthereum className='m-1' />}</button>
+<button className='flex text-justify  w-fit' onClick={navigateTailwind}>{<SiTailwindcss className='m-1' style={{ color: ' #57bfff' }} />}Tailwind{<SiTailwindcss className='m-1' style={{ color: ' #57bfff' }} />}</button> */}

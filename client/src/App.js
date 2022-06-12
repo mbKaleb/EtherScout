@@ -82,7 +82,7 @@ export default function App() {
           <Route path="whales" element={<Whales />} >
             {/* Whale user data  */}
           </Route>
-
+          
           <Route path="login" element={<LogIn setCurrentUser={setCurrentUser} />} />    {/*login Wallets*/}
           <Route path="/signup" element={<SignUp setCurrentUser={setCurrentUser} />} /> {/*sign up Wallets*/}
 
