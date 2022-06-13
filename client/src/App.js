@@ -1,5 +1,5 @@
 // React Imports
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 
 
@@ -23,7 +23,7 @@ import './App.css';
 import Technologies from "./pages/Technologies";
 
 //Development Keys
-require("dotenv").config();
+// require("dotenv").config();
 //process.env.name
 
 
