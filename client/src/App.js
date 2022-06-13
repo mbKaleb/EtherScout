@@ -22,6 +22,10 @@ import PageNotFound from "./pages/PageNotFound";
 import './App.css';
 import Technologies from "./pages/Technologies";
 
+//Development Keys
+require("dotenv").config();
+//process.env.name
+
 
 export default function App() {
 
