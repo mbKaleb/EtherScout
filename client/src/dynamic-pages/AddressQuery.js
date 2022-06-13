@@ -2,6 +2,8 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom"
 
+import { ETHERSCANKEY } from "../keys";
+
 //Ethers Imports
 import { ethers } from "ethers";
 
@@ -22,7 +24,7 @@ export default function AddressQuery({currentEthPrice}) {
     //Ether Network and key
   const network = 'homestead';
   const provider = ethers.getDefaultProvider(network, {
-    etherscan: '5JJTINSZ38FFRH9VRUDJXHTNW6W8SF3TFC',
+    etherscan: ETHERSCANKEY,
   });
 
   //Async Hook Assignment

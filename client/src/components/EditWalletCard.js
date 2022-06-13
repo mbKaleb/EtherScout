@@ -6,6 +6,7 @@ import { useState, useEffect } from "react"
 //Library Imports
 import { ethers } from "ethers";
 
+import { ETHERSCANKEY } from "../keys";
 
 export default function EditWalletCard({ wallet }) {
 
@@ -22,7 +23,7 @@ export default function EditWalletCard({ wallet }) {
     const normalFont = "font-normal ml-2"
 
     //Basic Variable Assignment
-    const url = `https://api.etherscan.io/api?module=account&action=balance&address=${wallet.wallet_address}&tag=latest&apikey=5JJTINSZ38FFRH9VRUDJXHTNW6W8SF3TFC`
+    const url = `https://api.etherscan.io/api?module=account&action=balance&address=${wallet.wallet_address}&tag=latest&apikey=${ETHERSCANKEY}`
 
     //Fetch Assignment
     const userWalletFetch = () => {

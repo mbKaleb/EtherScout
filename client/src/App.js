@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 
 
-
 // Page Components
 import ParentPage from "./pages/ParentPage";
 import Home from "./pages/Home";
@@ -11,6 +10,7 @@ import WatchedWallets from "./pages/WatchedWallets";
 import WalletFinder from "./pages/WalletFinder"
 import Whales from "./pages/Whales";
 import AddressQuery from "./dynamic-pages/AddressQuery";
+import Technologies from "./pages/Technologies";
 
 import LogIn from "./pages/LogIn";
 import SignUp from "./pages/SignUp";
@@ -20,11 +20,9 @@ import PageNotFound from "./pages/PageNotFound";
 
 // Style Sheet
 import './App.css';
-import Technologies from "./pages/Technologies";
 
 //Development Keys
-// require("dotenv").config();
-//process.env.name
+import { ETHERSCANKEY } from "./keys";
 
 
 export default function App() {
@@ -32,15 +30,6 @@ export default function App() {
   //State Assignment
   const [currentUser, setCurrentUser] = useState()
   const [currentEthPrice, setCurrentEthPrice] = useState(1)
-
-  //Variable Assignment
-  const isLoggedIn = () => {
-    if (currentUser) {
-      return (true)
-    } else {
-      return (false)
-    }
-  }
 
   //Fetch Assignments
   const getMeFetch = () => {
@@ -63,13 +52,12 @@ export default function App() {
   //   }).then(r => r.json()).then(console.log)
   // }
   const getLatestEthPrice = () => {
-    fetch(`https://api.etherscan.io/api?module=stats&action=ethprice&apikey=5JJTINSZ38FFRH9VRUDJXHTNW6W8SF3TFC`).then(res => res.json()).then(res => setCurrentEthPrice(res.result.ethusd))
+    fetch(`https://api.etherscan.io/api?module=stats&action=ethprice&apikey=${ETHERSCANKEY}`).then(res => res.json()).then(res => setCurrentEthPrice(res.result.ethusd))
   }
 
   //On-page-load:
   useEffect(() => {
     getMeFetch()
-    isLoggedIn() //Remove later (for development)
     // getNewestWhaleTransaction()
     getLatestEthPrice()
   }, [])

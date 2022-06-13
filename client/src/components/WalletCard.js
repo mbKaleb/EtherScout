@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import { ethers } from "ethers";
 
+import { ETHERSCANKEY } from "../keys";
 
 export default function WalletCard({ wallet, currentEthPrice }) {
   const [walletBalance, setWalletBalance] = useState()
@@ -9,7 +10,7 @@ export default function WalletCard({ wallet, currentEthPrice }) {
   const boldFont = "font-semibold flex m-1"
   const normalFont = "font-normal flex mx-1"
 
-  const url = `https://api.etherscan.io/api?module=account&action=balance&address=${wallet.wallet_address}&tag=latest&apikey=5JJTINSZ38FFRH9VRUDJXHTNW6W8SF3TFC`
+  const url = `https://api.etherscan.io/api?module=account&action=balance&address=${wallet.wallet_address}&tag=latest&apikey=${ETHERSCANKEY}`
   const formatedEthBalance = () => { return ethers.utils.formatUnits(walletBalance, 'ether')}
 
   const userWalletFetch = (e) => {
