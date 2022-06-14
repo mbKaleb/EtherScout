@@ -95,7 +95,7 @@ export default function Correlate() {
   }
 
   return (
-    <div className="justify-content-center center rounded-1 bg-gray-300 w-screen p-3 min-w-fit">
+    <div className="justify-content-center center rounded-1 bg-gray-200 w-screen p-3 min-w-fit">
 
       <div className="flex justify-center ">
         <div className="flex justify-center w-6/12 border rounded-sm bg-white drop-shadow p-2 font-medium ml-2 pl-4">Correlate and analyze relationships between two wallets</div>
