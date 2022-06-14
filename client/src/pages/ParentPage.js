@@ -20,7 +20,7 @@ export default function ParentPage({ currentUser, setCurrentUser, currentEthPric
   const toggleSidebar = () => {
     setIsSidebarActive(isSidebarActive => !isSidebarActive)
   }
-  const [buttonTextContent, setButtonTextContent] = useState('Home')
+  const [buttonTextContent, setButtonTextContent] = useState('Home V')
   const textContentHandler = (text) => {
     setButtonTextContent(text);
   }
@@ -50,6 +50,7 @@ export default function ParentPage({ currentUser, setCurrentUser, currentEthPric
   }
   const navigateHome = () => {
     navigate('/')
+    setButtonTextContent('Home V')
   }
 
 
@@ -97,7 +98,7 @@ export default function ParentPage({ currentUser, setCurrentUser, currentEthPric
             <button className='rounded outline outline-1 outline-black bg-purple-600 font-semibold text-white w-24' onClick={logOutHandler}>Logout</button>
           </div> )}
         </div>
-        <Sidebar isSidebarActive={isSidebarActive} currentUser={currentUser} toggleSidebar={toggleSidebar} textContentHandler={textContentHandler} />
+        <Sidebar isSidebarActive={isSidebarActive} currentUser={currentUser} toggleSidebar={toggleSidebar} textContentHandler={textContentHandler} buttonTextContent={buttonTextContent} />
       </div>
       <Outlet context={[currentUser, currentEthPrice]} />
     </div>

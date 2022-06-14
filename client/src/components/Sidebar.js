@@ -4,7 +4,7 @@
 import { useNavigate } from "react-router-dom"
 
 
-export default function Sidebar({ isSidebarActive, currentUser, toggleSidebar }) {
+export default function Sidebar({ isSidebarActive, currentUser, toggleSidebar, textContentHandler, buttonTextContent }) {
 
   //UseNavigate hook assignment
   const navigate = useNavigate();
@@ -22,6 +22,8 @@ export default function Sidebar({ isSidebarActive, currentUser, toggleSidebar })
   const navigateHandler = (e) => {
     navigate(e.target.name)
     toggleSidebar()
+    textContentHandler(e.target.textContent + 'V')
+    // textContentHandler(e.target.textCont)
     
   }
   const navigateAuthorizedUser = (e) => {
@@ -36,12 +38,12 @@ export default function Sidebar({ isSidebarActive, currentUser, toggleSidebar })
     if (isSidebarActive) {
       return (
       <div className='computed:( h-fit z-40 absolute top-1 left-44 w-48 ) style:( bg-gray-100 outline outline-2 outline-gray-100 rounded-sm drop-shadow-xl )'>
-        <button className={blueButton} name={'/'} onClick={toggleSidebar} > Home </button>
-        <button className={blueButton} name={'/technologies'} onClick={navigateHandler} > Technologies </button>
+        <button className={blueButton} name={'/'} onClick={toggleSidebar} >{buttonTextContent}</button>
+        { (buttonTextContent == 'Technologies') ? null : (<button className={blueButton} name={'/technologies'} onClick={navigateHandler} > Technologies </button>) }
         <input className="border border-black rounded-sm text-lg font-light outline-gray-600 ml-2 w-11/12 my-1 " placeholder="Filter" />
         <div className="border m-1" />
-        <button className={blueButton} name={'/address-query'} onClick={navigateHandler} > Address Query </button>
-        <button className={blueButton} name={'/correlate'} onClick={navigateHandler} > Correlate </button>
+        { (buttonTextContent == '' ) ? null : (<button className={blueButton} name={'/address-query'} onClick={navigateHandler} > Address Query </button>) }
+        { (buttonTextContent == ' ' ) ? null : (<button className={blueButton} name={'/correlate'} onClick={navigateHandler} > Correlate </button>) }
       </div> )
     } else {
       return (
