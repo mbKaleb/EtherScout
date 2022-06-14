@@ -9,7 +9,7 @@ import { ethers } from "ethers";
 
 //Hooks
 import { allTransactions } from "../hooks/endpoints";
-import { SiIterm2 } from "react-icons/si";
+import { SiIterm2, SiMomenteo } from "react-icons/si";
 
 export default function AddressQuery({currentEthPrice}) {
 
@@ -59,10 +59,8 @@ export default function AddressQuery({currentEthPrice}) {
     const response = await fetch(allTransactions(address, ETHERSCANKEY) )
       if (response.ok) {
         const transactions = await response.json();
-        // console.log(transactions.result[transactions.result.length -1])
         setTransactions(transactions.result)
-        // console.log(stateTransactions)
-        return transactions
+        console.log(stateTransactions)
       }
   }
 
@@ -87,25 +85,23 @@ export default function AddressQuery({currentEthPrice}) {
     }
   }
 
+
   //On-Page-Load
   useEffect(() => {
     getData()
     getTransactionData(walletAddress)
   }, [ensName, resolverInstance]);
 
-
   return (
-    <div className="justify-center rounded-1 bg-gray-200 w-10/12 p-2 min-w-fit">
+    <div className="justify-center rounded-1 bg-gray-200 w-10/12 p-3 min-w-fit">
       <div className="Address rounded-sm bg-white drop-shadow p-2">{" Address: "+ walletAddress}</div>
       <div className="flex mt-2">
-
         <div className="grid-flex rounded-sm bg-white drop-shadow w-6/12 mr-2 p-4 ">
           <div className="mb-2 font-medium">Overview</div>
           <div className="flex border-b p-1"> <div className="grow">ETH Balance: </div>   <div >{walletAddress ? ethBalance +' ETH' : "Loading..."}</div> </div>
           <div className="flex border-b p-1"> <div className="grow">USD Est. Value: </div>   <div >{ethBalance ? "$"+(Math.round((ethBalance*currentEthPrice) * 100) / 100).toFixed(2) : "Loading..."}</div></div>
           <div className="flex border-b p-1"> <div className="grow">Wallet Type</div>   <div>Unknown</div> </div>
         </div>
-
         <div className="[ENS Section]  grid-flex rounded-sm bg-white drop-shadow w-6/12 ml-2 p-4 min-w-fit">
           <div className="[TITLE] mb-2 font-medium min-w-fit">Ethereum Naming Service (ENS)</div>
           <div className="[LEFT SECTION] flex min-w-fit">
@@ -122,30 +118,24 @@ export default function AddressQuery({currentEthPrice}) {
           </div>
         </div>
       </div>
-
       <div className="rounded-sm bg-white drop-shadow w-full mt-3 p-4 ">
         <div className="mb-2 border-b text-medium font-semibold ">Transactions</div>
         <div >
           <table className="w-full">
-            <tr className="font-semibold m-2" > <td>Tx Hash</td> <td>Age</td> <td>Eth Value</td> <td>From</td> <td>To</td>  </tr>
+            <tr className="font-semibold m-2" > <td>Tx Hash</td> <td>Date</td> <td>Eth Value</td> <td>From</td> <td>To</td>  </tr>
             { stateTransactions ? Object.entries(stateTransactions).map(item => {
-              console.log(stateTransactions)
-              return ( <tr className="border-b p-2 m-2"> <td className="w-fit"> { item[1].hash } </td> <td> { item[1].age } </td>  <td> { (Math.round((item[1].value) ) / 1000000000000000000 ).toFixed(2) } Ether </td> <td> { item[1].from } </td>  <td> { item[1].to } </td>  </tr> );
-            }) :  null }
-            <tr ></tr>
+              return (
+              <tr className="border-b p-2 m-2">
+                <td className="p-2">{ item[1].hash?.substring(0,22) + "..." }</td>
+                <td>{ (new Date(item[1].timeStamp * 1000).toString().substring(3,16))    }</td>
+                <td>{ (Math.round((item[1].value) ) / 1000000000000000000 ).toFixed(2) } Ether</td>
+                <td>{ item[1].from?.substring(0,22) + "..." }</td>
+                <td>{ item[1].to?.substring(0,22)  + "..."  }</td>
+              </tr> )
+            }) : null }
           </table>
         </div>
       </div>
     </div>
   )
 }
-
-
-
-// { stateTransactions ? Object.entries(stateTransactions).map(item => {
-//   <tr> { Object.entries(item[1]).map((item) => { if(true){
-//    //  return ( <td>test</td> )
-//    }}) } </tr>
-//   })
-//   : 
-//   null }

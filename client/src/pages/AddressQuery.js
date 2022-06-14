@@ -37,7 +37,7 @@ export default function AddressQuery() {
   //Handler Assignments
   const searchHandler = (e) => {
     e.preventDefault()
-    navigate(`/wallet-finder/${formState.walletaddress}`)
+    navigate(`/address-query/${formState.walletaddress}`)
     setIsSearchbox(false)
     setFormState(formState)
   }
@@ -62,7 +62,7 @@ export default function AddressQuery() {
 
 
   return (
-    <div className={PageStyles} >
+    <div className={PageStyles}>
       {isSearchbox ? (
       <form className="bg-white rounded-sm outline outline-1 min-w-min h-32 w-96 m-4 p-1" onSubmit={queryCotroller}>
         <div className="Drop-Down bg-white rounded m-1 mt-2 flex">
