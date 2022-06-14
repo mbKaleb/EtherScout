@@ -9,15 +9,17 @@ export default function Correlate() {
   //Hook Assignment
   const navigate = useNavigate();
 
-  //Universal Page State
-  const initialFormState = {walletaddress: null}
+   // Page State
+  const initialForm1State = {wallet: 1}
+  const initialForm2State = {wallet: 2}
+
   const [isFormVisible, setisFormVisible] = useState(true)
 
-  //Explicit Form State
-  const [form1State, setForm1State] = useState(initialFormState)
-  const [form2State, setForm2State] = useState(initialFormState)
-
+    // Explicit Form State
+  const [form1State, setForm1State] = useState(initialForm1State)
   const [optionSelector1, setOptionSelector1] = useState("hexidecimal");
+  
+  const [form2State, setForm2State] = useState(initialForm2State)
   const [optionSelector2, setOptionSelector2] = useState("hexidecimal")
 
   const [errorDisplay1, setErrorDisplay1] = useState([])
@@ -64,13 +66,31 @@ export default function Correlate() {
     // }
   }
 
+  const isSearchValid = (input, searchType) => {
+    if (searchType == 'hexidecimal') {
+      if (input.length == 42) {
+        return true
+      } else {
+        if (input.wallet == 1) {
+          setErrorDisplay1('Invalid Address')
+        } else if (input.wallet == 2) {
+          setErrorDisplay2("Invalid Address")
+        } else {
+          throw("Error from isSearchValid")
+        }
+        return false;
+      }
+    }
+  }
+
   const noEvent = (e) => {
     e.preventDefault()
-    console.log('did nothing')
   }
   const submitHandler = (e) => {
-    e.preventDefault();console.log("target:", e.target);console.log('ran search handler')
-    
+    e.preventDefault()
+    if ( isSearchValid(form1State, optionSelector1) && isSearchValid(form2State, optionSelector2) ) {
+      navigate(`/correlate:${form1State}&${form2State}`);
+    }
   }
 
   return (
@@ -92,7 +112,7 @@ export default function Correlate() {
             </select>
             </div>
             <input className="Search-Bar m-2 mt-4 rounded-sm outline outline-1 bg-gray-100 w-96 drop-shadow pl-1"
-              value={form1State?.walletaddress}
+              value={form1State?.walletaddress1}
               placeholder="Wallet Address"
               name="walletaddress"
               onChange={handleInput1}
@@ -111,7 +131,7 @@ export default function Correlate() {
             </select>
             </div>
             <input className="Search-Bar m-2 mt-4 rounded-sm outline outline-1 bg-gray-100 w-96 drop-shadow pl-1"
-              value={form2State?.walletaddress}
+              value={form2State?.walletaddress2}
               placeholder="Wallet Address"
               name="walletaddress"
               onChange={handleInput2}
