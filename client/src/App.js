@@ -77,7 +77,7 @@ export default function App() {
             <Route path=':walletAddress' element={<AddressQueryTool currentEthPrice={currentEthPrice}/>} />  {/**/}
           </Route>
 
-          <Route path="Correlate" element={<Correlate />} >
+          <Route path="correlate" element={<Correlate />} >
             <Route path=':walletAddress' element={<CorrelateTool />} />
           </Route>
 
