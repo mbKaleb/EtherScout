@@ -7,6 +7,10 @@ import { ETHERSCANKEY } from "../keys";
 //Ethers Imports
 import { ethers } from "ethers";
 
+//Hooks
+import { allTransactions } from "../hooks/endpoints";
+import { SiIterm2 } from "react-icons/si";
+
 export default function AddressQuery({currentEthPrice}) {
 
   //Hook Assignment
@@ -15,6 +19,7 @@ export default function AddressQuery({currentEthPrice}) {
   //State Assignment
     //Basic Address Data
   const [ethBalance, setEthBalance] = useState(0);
+  const [stateTransactions, setTransactions] = useState({})
     //ENS & controller data
   const [ensName, setEnsName] = useState(null);
   const [resolverInstance, setResolverInstance] = useState(null);
@@ -50,6 +55,17 @@ export default function AddressQuery({currentEthPrice}) {
     return email
   }
 
+  async function getTransactionData(address) {
+    const response = await fetch(allTransactions(address, ETHERSCANKEY) )
+      if (response.ok) {
+        const transactions = await response.json();
+        // console.log(transactions.result[transactions.result.length -1])
+        setTransactions(transactions.result)
+        // console.log(stateTransactions)
+        return transactions
+      }
+  }
+
   async function getData() {
     //Get ENS name from hexidecimal
     let resp0 = await getEthNamespace(walletAddress)
@@ -74,7 +90,9 @@ export default function AddressQuery({currentEthPrice}) {
   //On-Page-Load
   useEffect(() => {
     getData()
+    getTransactionData(walletAddress)
   }, [ensName, resolverInstance]);
+
 
   return (
     <div className="justify-center rounded-1 bg-gray-200 w-10/12 p-2 min-w-fit">
@@ -107,9 +125,27 @@ export default function AddressQuery({currentEthPrice}) {
 
       <div className="rounded-sm bg-white drop-shadow w-full mt-3 p-4 ">
         <div className="mb-2 border-b text-medium font-semibold ">Transactions</div>
-        <div className="border-b">transaction</div>
-
+        <div >
+          <table className="w-full">
+            <tr className="font-semibold m-2" > <td>Tx Hash</td> <td>Age</td> <td>Eth Value</td> <td>From</td> <td>To</td>  </tr>
+            { stateTransactions ? Object.entries(stateTransactions).map(item => {
+              console.log(stateTransactions)
+              return ( <tr className="border-b p-2 m-2"> <td className="w-fit"> { item[1].hash } </td> <td> { item[1].age } </td>  <td> { (Math.round((item[1].value) ) / 1000000000000000000 ).toFixed(2) } Ether </td> <td> { item[1].from } </td>  <td> { item[1].to } </td>  </tr> );
+            }) :  null }
+            <tr ></tr>
+          </table>
+        </div>
       </div>
     </div>
   )
 }
+
+
+
+// { stateTransactions ? Object.entries(stateTransactions).map(item => {
+//   <tr> { Object.entries(item[1]).map((item) => { if(true){
+//    //  return ( <td>test</td> )
+//    }}) } </tr>
+//   })
+//   : 
+//   null }

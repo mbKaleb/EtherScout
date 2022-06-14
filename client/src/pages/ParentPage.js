@@ -20,19 +20,13 @@ export default function ParentPage({ currentUser, setCurrentUser, currentEthPric
   const toggleSidebar = () => {
     setIsSidebarActive(isSidebarActive => !isSidebarActive)
   }
+  const [buttonTextContent, setButtonTextContent] = useState('Home')
+  const textContentHandler = (text) => {
+    setButtonTextContent(text);
+  }
 
   //Hook Assignment
   const navigate = useNavigate();
-
-  //Basic Variable Assignment
-  const isLoggedIn = () => {
-    if (currentUser) {
-      return (true)
-    } else {
-      return (false)
-    }
-  }
-
 
   //Navigation assignment
   const callLogInForm = () => {
@@ -80,7 +74,7 @@ export default function ParentPage({ currentUser, setCurrentUser, currentEthPric
     <div className='bg-gray-200 h-screen'>
       <div className='bg-gray-100 p-2 top-11 w-full sticky top-0 outline outline-blue-700 z-50 h-12 flex'>
         <button className={logoStyles} onClick={navigateHome} > EtherScout </button>
-        <button className={dropDownButtonStyles} onClick={toggleSidebar}>Home V</button>
+        <button className={dropDownButtonStyles} onClick={toggleSidebar}>{buttonTextContent}</button>
         <div className='grow'></div>
         <div className='h-max mt-1 ml-8 z-50 w-42'>
           {!isLoggedIn() ? (<>
@@ -94,7 +88,7 @@ export default function ParentPage({ currentUser, setCurrentUser, currentEthPric
             <button className='rounded outline outline-1 outline-black bg-purple-600 font-semibold text-white w-24' onClick={logOutHandler}>Logout</button>
           </div> )}
         </div>
-        <Sidebar isSidebarActive={isSidebarActive} currentUser={currentUser} toggleSidebar={toggleSidebar} />
+        <Sidebar isSidebarActive={isSidebarActive} currentUser={currentUser} toggleSidebar={toggleSidebar} textContentHandler={textContentHandler} />
       </div>
       <Outlet context={[currentUser, currentEthPrice]} />
     </div>

@@ -9,19 +9,11 @@ export default function Sidebar({ isSidebarActive, currentUser, toggleSidebar })
   //UseNavigate hook assignment
   const navigate = useNavigate();
 
-  //Basic Variable Assignment
-  const isLoggedIn = () => {
-    if (currentUser) {
-      return (true)
-    } else {
-      return (false)
-    }
-  }
-
   //Navigate to endpoint based on the button 'name' data
   const navigateHandler = (e) => {
     navigate(e.target.name)
     toggleSidebar()
+
   }
   const navigateAuthorizedUser = (e) => {
     if (isLoggedIn) {
@@ -30,7 +22,7 @@ export default function Sidebar({ isSidebarActive, currentUser, toggleSidebar })
   }
 
   //Styles Assignment
-  const blueButton = 'Computed:( w-full h-8 my-1 pl-2 ) Styles:( rounded-sm outline outline-1 outline-gray-300 bg-blue-800 ) text/font: ( text-xl font-light text-white text-left )'
+  const blueButton = 'Computed:( w-full h-8 my-1 pl-2 ) Styles:( rounded-sm outline outline-1 outline-gray-300 bg-blue-800 ) text/font: ( text-xl font-light text-white text-left )';
 
     if (isSidebarActive) {
       return (

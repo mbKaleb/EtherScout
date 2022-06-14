@@ -52,13 +52,13 @@ export default function App() {
   //   }).then(r => r.json()).then(console.log)
   // }
   const getLatestEthPrice = () => {
-    fetch(`https://api.etherscan.io/api?module=stats&action=ethprice&apikey=${ETHERSCANKEY}`).then(res => res.json()).then(res => setCurrentEthPrice(res.result.ethusd))
+    fetch(`https://api.etherscan.io/api?module=stats&action=ethprice&apikey=${ETHERSCANKEY}`)
+    .then(res => res.json()).then(res => setCurrentEthPrice(res.result.ethusd))
   }
 
   //On-page-load:
   useEffect(() => {
     getMeFetch()
-    // getNewestWhaleTransaction()
     getLatestEthPrice()
   }, [])
 
@@ -68,14 +68,14 @@ export default function App() {
       <Routes>
         <Route path="/" element={<ParentPage currentUser={currentUser} setCurrentUser={setCurrentUser} currentEthPrice={currentEthPrice} />}> {/*Parent Route/Source */}
           <Route path="" element={<Home />} />                          {/*Home Page*/}
-          <Route path="watched-wallets" element={<WatchedWallets />} /> {/*Watched Wallets*/}
           <Route path="technologies" element={<Technologies />} />      {/*Technologies*/}
 
           <Route path="wallet-finder" element={<WalletFinder />} >      {/*Wallet Finder, Not Completed Yet*/}
             <Route path=':walletAddress' element={<AddressQuery currentEthPrice={currentEthPrice}/>} />
           </Route>
-          <Route path="whales" element={<Whales />} >
-            {/* Whale user data  */}
+          
+          <Route path="correlation-relationship" element={<WalletCompare />} >
+            <Route path=':walletAddress' element={<CorrelateRelationships />} />
           </Route>
           
           <Route path="login" element={<LogIn setCurrentUser={setCurrentUser} />} />    {/*login Wallets*/}
