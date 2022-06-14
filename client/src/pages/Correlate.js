@@ -68,7 +68,8 @@ export default function Correlate() {
 
   const isSearchValid = (input, searchType) => {
     if (searchType == 'hexidecimal') {
-      if (input.length == 42) {
+      if (input.walletaddress?.length == 42) {
+        setErrorDisplay1('')
         return true
       } else {
         if (input.wallet == 1) {
@@ -89,7 +90,7 @@ export default function Correlate() {
   const submitHandler = (e) => {
     e.preventDefault()
     if ( isSearchValid(form1State, optionSelector1) && isSearchValid(form2State, optionSelector2) ) {
-      navigate(`/correlate:${form1State}&${form2State}`);
+      navigate(`/correlate:${form1State.walletaddress}&${form2State.walletaddress}`);
     }
   }
 
