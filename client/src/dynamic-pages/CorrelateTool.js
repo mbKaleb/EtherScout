@@ -1,5 +1,5 @@
 
-export default function CorrelateRelationships() {
+export default function CorrelateTool() {
   return (
     <div>
         <>Test</>

@@ -9,7 +9,7 @@ import { PageStyles } from "../hooks/Styles";
 
 
 
-export default function Home() {
+export default function AddressQuery() {
 
   //Hook Assignment
   const navigate = useNavigate();

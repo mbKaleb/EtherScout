@@ -1,5 +1,5 @@
 
-export default function correlateRelationship() {
+export default function WalletCompare() {
 
     
 

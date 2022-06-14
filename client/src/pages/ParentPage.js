@@ -25,6 +25,15 @@ export default function ParentPage({ currentUser, setCurrentUser, currentEthPric
     setButtonTextContent(text);
   }
 
+  //Basic Variable Assignment
+  const isLoggedIn = () => {
+    if (currentUser) {
+      return (true)
+    } else {
+      return (false)
+    }
+  }
+
   //Hook Assignment
   const navigate = useNavigate();
 

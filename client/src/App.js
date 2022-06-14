@@ -6,11 +6,13 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 // Page Components
 import ParentPage from "./pages/ParentPage";
 import Home from "./pages/Home";
-import WatchedWallets from "./pages/WatchedWallets";
-import WalletFinder from "./pages/WalletFinder"
-import Whales from "./pages/Whales";
-import AddressQuery from "./dynamic-pages/AddressQuery";
 import Technologies from "./pages/Technologies";
+
+import AddressQuery from "./pages/AddressQuery";
+import AddressQueryTool from "./dynamic-pages/AddressQueryTool";
+
+import Correlate from "./pages/Correlate";
+import CorrelateTool from "./dynamic-pages/CorrelateTool";
 
 import LogIn from "./pages/LogIn";
 import SignUp from "./pages/SignUp";
@@ -42,6 +44,7 @@ export default function App() {
         }
       })
   }
+
   // const getNewestWhaleTransaction = () => {
   //   fetch('https://cors-anywhere.herokuapp.com/https://api.whale-alert.io/v1/status', {
   //     headers: {
@@ -70,14 +73,14 @@ export default function App() {
           <Route path="" element={<Home />} />                          {/*Home Page*/}
           <Route path="technologies" element={<Technologies />} />      {/*Technologies*/}
 
-          <Route path="wallet-finder" element={<WalletFinder />} >      {/*Wallet Finder, Not Completed Yet*/}
-            <Route path=':walletAddress' element={<AddressQuery currentEthPrice={currentEthPrice}/>} />
+          <Route path="address-query" element={<AddressQuery />} >                                       {/*Wallet Finder*/}
+            <Route path=':walletAddress' element={<AddressQueryTool currentEthPrice={currentEthPrice}/>} />  {/**/}
           </Route>
-          
-          <Route path="correlation-relationship" element={<WalletCompare />} >
-            <Route path=':walletAddress' element={<CorrelateRelationships />} />
+
+          <Route path="Correlate" element={<Correlate />} >
+            <Route path=':walletAddress' element={<CorrelateTool />} />
           </Route>
-          
+
           <Route path="login" element={<LogIn setCurrentUser={setCurrentUser} />} />    {/*login Wallets*/}
           <Route path="/signup" element={<SignUp setCurrentUser={setCurrentUser} />} /> {/*sign up Wallets*/}
 

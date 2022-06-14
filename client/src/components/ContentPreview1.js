@@ -6,7 +6,7 @@ import WhaleCard from "./WhaleCard";
 export default function ContentPreview1({ currentUser, currentEthPrice }) {
 
   const [whaleData, setWhaleData] = useState([])
-  
+
   const isLoggedIn = () => {
     if (currentUser) {
       return (true)

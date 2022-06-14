@@ -1,5 +1,3 @@
-import { PageStyles } from "../hooks/Styles"
-
 export default function Technologies() {
 
   const containerStyles = "p-4 w-fit"
@@ -54,12 +52,3 @@ export default function Technologies() {
     </div>
   )
 }
-
-{/* 
-  <div className={containerStyles} >
-    <h2 className={titleStyles} >Technology</h2>
-    <h3 className={h3Styles} > subtext </h3>
-    <p className={textContent} >
-    </p>
-  </div> 
-*/}

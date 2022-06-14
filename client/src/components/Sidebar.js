@@ -9,11 +9,20 @@ export default function Sidebar({ isSidebarActive, currentUser, toggleSidebar })
   //UseNavigate hook assignment
   const navigate = useNavigate();
 
+  //Basic Variable Assignment
+  const isLoggedIn = () => {
+    if (currentUser) {
+      return (true)
+    } else {
+      return (false)
+    }
+  }
+
   //Navigate to endpoint based on the button 'name' data
   const navigateHandler = (e) => {
     navigate(e.target.name)
     toggleSidebar()
-
+    
   }
   const navigateAuthorizedUser = (e) => {
     if (isLoggedIn) {
@@ -31,8 +40,8 @@ export default function Sidebar({ isSidebarActive, currentUser, toggleSidebar })
         <button className={blueButton} name={'/technologies'} onClick={navigateHandler} > Technologies </button>
         <input className="border border-black rounded-sm text-lg font-light outline-gray-600 ml-2 w-11/12 my-1 " placeholder="Filter" />
         <div className="border m-1" />
-        <button className={blueButton} name={'/wallet-finder'} onClick={navigateHandler} > Wallet Finder </button>
-        <button className={blueButton} name={'/wallet-finder'} onClick={navigateHandler} > Address Analyzer </button>
+        <button className={blueButton} name={'/address-query'} onClick={navigateHandler} > Address Query </button>
+        <button className={blueButton} name={'/correlate'} onClick={navigateHandler} > Correlate </button>
       </div> )
     } else {
       return (
