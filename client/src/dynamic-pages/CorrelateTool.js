@@ -23,11 +23,11 @@ export default function CorrelateTool({currentEthPrice}) {
   //State Assignment
 
     // Wallet 1
-  const [walletAddress1, setWalletAddress1] = useState(0);
+  const [walletAddress1, setWalletAddress1] = useState('');
     const [balance1, setBalance1] = useState(0);
     const [resolver1, setResolver1] = useState({});
     // Wallet 2
-  const [walletAddress2, setWalletAddress2] = useState(0);
+  const [walletAddress2, setWalletAddress2] = useState('');
     const [balance2, setBalance2] = useState(0);
     const [resolver2, setResolver2] = useState({});
 
@@ -69,11 +69,18 @@ export default function CorrelateTool({currentEthPrice}) {
       if (response.ok) {
         const transactions = await response.json();
         setTransactions(transactions.result)
-        console.log(stateTransactions)
       }
   }
+
   const parseAddress = () => {
     console.log(walletAddress)
+    if (walletAddress.slice(0,2) === '0x'){
+      setWalletAddress1(walletAddress.slice(0,41))
+      if (walletAddress.slice(43, 45) === '0x') {
+        setWalletAddress2(walletAddress.slice(43,-1))
+      }
+    }
+    return 0;
   }
   // async function getData() {
   //   //Get ENS name from hexidecimal
@@ -100,8 +107,9 @@ export default function CorrelateTool({currentEthPrice}) {
   //On-Page-Load
   useEffect(() => {
     // getData()
-    getTransactionData(walletAddress)
-  }, []);
+    parseAddress()
+    // getTransactionData(walletAddress)
+  }, [walletAddress]);
 
 
   return (
@@ -111,13 +119,15 @@ export default function CorrelateTool({currentEthPrice}) {
 
         <div className="grid-flex rounded-sm bg-white drop-shadow w-6/12 mr-2 p-4 ">
           <div className="mb-2 font-medium">Wallet 1</div>
+          <div>{walletAddress1}</div>
           <div className="flex border-b p-1"> <div className="grow">ETH Balance: </div> <div>{walletAddress1 ? balance1 +' ETH' : "Loading..." } </div> </div>
           <div className="flex border-b p-1"> <div className="grow">USD Est. Value: </div> <div>{walletAddress1 ? "$"+(Math.round((balance1 * currentEthPrice) * 100) / 100).toFixed(2) : "Loading..."}</div></div>
           <div className="flex border-b p-1"> <div className="grow">Wallet Type</div> <div>Unknown</div> </div>
         </div>
 
         <div className="grid-flex rounded-sm bg-white drop-shadow w-6/12 ml-2 p-4 ">
-          <div className="mb-2 font-medium">Wallet 2</div>
+          <div className="mb font-medium">Wallet 2</div>
+          <div>{walletAddress2}</div>
           <div className="flex border-b p-1"> <div className="grow">ETH Balance: </div> <div>{walletAddress2 ? balance2 +' ETH' : "Loading..." }</div> </div>
           <div className="flex border-b p-1"> <div className="grow">USD Est. Value: </div> <div>{walletAddress2 ? "$"+(Math.round((balance2*currentEthPrice) * 100) / 100).toFixed(2) : "Loading..."}</div></div>
           <div className="flex border-b p-1"> <div className="grow">Wallet Type</div> <div>Unknown</div> </div>
@@ -129,18 +139,20 @@ export default function CorrelateTool({currentEthPrice}) {
           <table className="w-full">
             <tr className="font-semibold m-2" > <td>Tx Hash</td> <td>Date</td> <td>Eth Value</td> <td>Wallet 1</td> <td>Wallet 2</td>  </tr>
             { stateTransactions ? Object.entries(stateTransactions).map(item => {
-              console.log(stateTransactions)
+              // console.log(stateTransactions)
               return (
               <tr className="border-b p-2 m-2">
+
                 <td className="p-2 w-0">{ item[1].hash?.substring(0,22) + "..." }</td>
 
                 <td>{ (new Date(item[1].timeStamp * 1000).toString().substring(3,16))    }</td>
 
+                {/* <td>{ walletAddress1?.substring(0,22) + "..." || null }</td> */}
+
                 <td>{ (Math.round((item[1].value) ) / 1000000000000000000 ).toFixed(2) } Ether</td>
 
-                <td>{ item[1].from?.substring(0,22) + "..." }</td>
-                
-                <td>{ item[1].to?.substring(0,22)  + "..."  }</td>
+                {/* <td>{ walletAddress2?.substring(0,22)  + "..." || null }</td> */}
+
               </tr> )
             }) : null }
           </table>
