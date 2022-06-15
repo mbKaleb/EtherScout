@@ -8,7 +8,6 @@ export default function Correlate() {
   //Hook Assignment
   const navigate = useNavigate();
   const { walletAddress } = useParams();
-  console.log(walletAddress)
 
    // Page State
   const initialForm1State = {wallet: 1}
