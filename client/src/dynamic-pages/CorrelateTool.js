@@ -1,8 +1,9 @@
 //React Imports
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom"
+import { FaBeer } from 'react-icons/fa';
 
-import { ETHERSCANKEY } from "../keys";
+import { AiOutlineArrowLeft } from  reacti
 
 //Ethers Imports
 import { ethers } from "ethers";
@@ -10,6 +11,8 @@ import { ethers } from "ethers";
 //Hooks
 import { allTransactions } from "../hooks/endpoints";
 import { SiIterm2, SiMomenteo } from "react-icons/si";
+import { ETHERSCANKEY } from "../keys";
+import react from "react";
 
 
 
@@ -98,16 +101,27 @@ export default function CorrelateTool({currentEthPrice}) {
       let resp = await getBalance(walletAddress2)
       setBalance2(resp)
     }
-
     //Reverse Lookup
-    if (walletAddress1 && resolver1 ) {
+    if (walletAddress1 && !ensName1 ) {
       let resp = await reverseLookup(walletAddress1)
       setEnsName1(resp)
     }
-
-    if (walletAddress2 && resolver2 ) {
+    if (walletAddress2 && !ensName2 ) {
       let resp = await reverseLookup(walletAddress2)
       setEnsName2(resp)
+    }
+    //Get Resolver Instance
+    if (ensName1 && !resolver1){
+      let resp = await getResolver(ensName1)
+      setResolver1(resp)
+    }
+    if (ensName2 && !resolver2){
+      let resp = await getResolver(ensName2)
+      setResolver2(resp)
+    }
+    //Get Transactions
+    if (walletAddress1){
+      await getTransactionData(walletAddress1)
     }
   }
 
@@ -122,7 +136,7 @@ export default function CorrelateTool({currentEthPrice}) {
 
   return (
     <div className="justify-center rounded-1 bg-gray-200 w-10/12 p-3 min-w-fit">
-      {/* <div className="Address rounded-sm bg-white drop-shadow p-2">{" Address: "+ walletAddress}</div> */}
+
       <div className="flex">
 
         <div className="grid-flex rounded-sm bg-white drop-shadow w-6/12 mr-2 p-4 ">
@@ -142,28 +156,31 @@ export default function CorrelateTool({currentEthPrice}) {
           <div className="flex border-b p-1"> <div className="grow">USD Est. Value: </div> <div>{balance2 ? "$"+(Math.round((balance2*currentEthPrice) * 100) / 100).toFixed(2) : "Loading..."}</div></div>
           <div className="flex border-b p-1"> <div className="grow">Wallet Type</div> <div>Unknown</div> </div>
         </div>
+
       </div>
+
       <div className="rounded-sm bg-white drop-shadow w-full mt-3 p-4 ">
         <div className="mb-2 border-b text-medium font-semibold ">Transactions</div>
         <div>
           <table className="w-full">
-            <tr className="font-semibold m-2" > <td>Tx Hash</td> <td>Date</td> <td>Eth Value</td> <td>Wallet 1</td> <td>Wallet 2</td>  </tr>
-            { stateTransactions ? Object.entries(stateTransactions).map(item => {
-              return (
-              <tr className="border-b p-2 m-2">
-
-                <td className="p-2 w-0">{ item[1].hash?.substring(0,22) + "..." }</td>
-
-                <td>{ (new Date(item[1].timeStamp * 1000).toString().substring(3,16))    }</td>
-
-                {/* <td>{ walletAddress1?.substring(0,22) + "..." || null }</td> */}
-
-                <td>{ (Math.round((item[1].value) ) / 1000000000000000000 ).toFixed(2) } Ether</td>
-
-                {/* <td>{ walletAddress2?.substring(0,22)  + "..." || null }</td> */}
-
-              </tr> )
+            <thead>
+              <tr className="font-semibold m-1" ><td>Tx Hash</td><td>Date</td><td>Wallet 1</td><td>Ether</td><td>Wallet 2</td></tr>
+            </thead>
+            <tbody>
+              { stateTransactions ? Object.entries(stateTransactions).map(item => {
+                if(walletAddress2 === (item[1].to || item[1].from) ){
+                  console.log(item)
+                  return (
+                    <tr className="border-b p-2 m-2">
+                  <td className="">{ item[1].hash?.substring(0,22) + "..." }</td>
+                  <td>{ (new Date(item[1].timeStamp * 1000).toString().substring(3,16))    }</td>
+                  <td>{ walletAddress1.substring(0,22) + "..." }</td>
+                  <td>{ (Math.round((item[1].value) ) / 1000000000000000000 ).toFixed(2) } Eth</td>
+                  <td>{ walletAddress2.substring(0,22)  + "..."  }</td>
+                </tr> )
+                }
             }) : null }
+            </tbody>
           </table>
         </div>
       </div>
