@@ -53,17 +53,17 @@ export default function Correlate() {
   }
 
   const isSearchValid = (input, searchType) => {
-    if (searchType == 'hexidecimal') {
-      if (input.walletaddress?.length == 42) {
+    if (searchType === 'hexidecimal') {
+      if (input.walletaddress?.length === 42) {
         setErrorDisplay1('')
         return true
       } else {
-        if (input.wallet == 1) {
+        if (input.wallet === 1) {
           setErrorDisplay1('Invalid Address')
-        } else if (input.wallet == 2) {
+        } else if (input.wallet === 2) {
           setErrorDisplay2("Invalid Address")
         } else {
-          throw("Error from isSearchValid")
+          throw new Error('Error from isSearchValid')
         }
         return false;
       }
