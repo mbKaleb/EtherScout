@@ -1,18 +1,16 @@
 //React Imports
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom"
-import { FaBeer } from 'react-icons/fa';
 
-import { AiOutlineArrowLeft } from  reacti
+import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai'
+import { SiIterm2, SiMomenteo } from "react-icons/si";
 
 //Ethers Imports
 import { ethers } from "ethers";
 
 //Hooks
 import { allTransactions } from "../hooks/endpoints";
-import { SiIterm2, SiMomenteo } from "react-icons/si";
 import { ETHERSCANKEY } from "../keys";
-import react from "react";
 
 
 
@@ -140,6 +138,8 @@ export default function CorrelateTool({currentEthPrice}) {
       <div className="flex">
 
         <div className="grid-flex rounded-sm bg-white drop-shadow w-6/12 mr-2 p-4 ">
+          <AiOutlineArrowLeft />
+          <AiOutlineArrowRight />
           <div className="font-medium">Wallet 1</div>
           <div className="font-light mb-0">{walletAddress1}</div>
           <div className="text-md mb-1">{ensName1 ? ensName1 : 'No Record'}</div>
@@ -175,7 +175,11 @@ export default function CorrelateTool({currentEthPrice}) {
                   <td className="">{ item[1].hash?.substring(0,22) + "..." }</td>
                   <td>{ (new Date(item[1].timeStamp * 1000).toString().substring(3,16))    }</td>
                   <td>{ walletAddress1.substring(0,22) + "..." }</td>
-                  <td>{ (Math.round((item[1].value) ) / 1000000000000000000 ).toFixed(2) } Eth</td>
+                  <div className="inline-flex items-baseline">
+                    <AiOutlineArrowLeft />
+                    <td>{ (Math.round((item[1].value) ) / 1000000000000000000 ).toFixed(2) } Eth</td>
+                    <AiOutlineArrowRight />
+                  </div>
                   <td>{ walletAddress2.substring(0,22)  + "..."  }</td>
                 </tr> )
                 }
