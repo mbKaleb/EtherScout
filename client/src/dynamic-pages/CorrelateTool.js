@@ -138,8 +138,6 @@ export default function CorrelateTool({currentEthPrice}) {
       <div className="flex">
 
         <div className="grid-flex rounded-sm bg-white drop-shadow w-6/12 mr-2 p-4 ">
-          <AiOutlineArrowLeft />
-          <AiOutlineArrowRight />
           <div className="font-medium">Wallet 1</div>
           <div className="font-light mb-0">{walletAddress1}</div>
           <div className="text-md mb-1">{ensName1 ? ensName1 : 'No Record'}</div>
@@ -164,23 +162,23 @@ export default function CorrelateTool({currentEthPrice}) {
         <div>
           <table className="w-full">
             <thead>
-              <tr className="font-semibold m-1" ><td>Tx Hash</td><td>Date</td><td>Wallet 1</td><td>Ether</td><td>Wallet 2</td></tr>
+              <tr className="font-semibold m-1 " ><td>Tx Hash</td><td>Date</td><td>Wallet 1</td><td className="pl-4">Ether</td><td className="">Wallet 2</td></tr>
             </thead>
-            <tbody>
+            <tbody className="justify-items-center">
               { stateTransactions ? Object.entries(stateTransactions).map(item => {
                 if(walletAddress2 === (item[1].to || item[1].from) ){
                   console.log(item)
                   return (
                     <tr className="border-b p-2 m-2">
                   <td className="">{ item[1].hash?.substring(0,22) + "..." }</td>
-                  <td>{ (new Date(item[1].timeStamp * 1000).toString().substring(3,16))    }</td>
-                  <td>{ walletAddress1.substring(0,22) + "..." }</td>
+                  <td>{ (new Date(item[1].timeStamp * 1000).toString().substring(3,16)) }</td>
+                  <td>{ ensName1 ? ensName1 : walletAddress1.substring(0,22) + "..." }</td> {/* First wallet*/}
                   <div className="inline-flex items-baseline">
-                    <AiOutlineArrowLeft />
+                    {(walletAddress2 === item[1].from) ? <AiOutlineArrowLeft className="pt-1"/> : null}
                     <td>{ (Math.round((item[1].value) ) / 1000000000000000000 ).toFixed(2) } Eth</td>
-                    <AiOutlineArrowRight />
+                    {(walletAddress2 === item[1].to) ?  <AiOutlineArrowRight className="pt-1"/> : null}
                   </div>
-                  <td>{ walletAddress2.substring(0,22)  + "..."  }</td>
+                  <td>{ ensName2 ? ensName2 : walletAddress2.substring(0,22)  + "..." }</td>
                 </tr> )
                 }
             }) : null }
