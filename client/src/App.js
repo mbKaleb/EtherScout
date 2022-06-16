@@ -78,7 +78,7 @@ export default function App() {
           </Route>
 
           <Route path="correlate" element={<Correlate />} >
-            <Route path=':walletAddress' element={<CorrelateTool />} />
+            <Route path=':walletAddress' element={<CorrelateTool currentEthPrice={currentEthPrice}/>} />
           </Route>
 
           <Route path="login" element={<LogIn setCurrentUser={setCurrentUser} />} />    {/*login Wallets*/}
