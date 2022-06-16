@@ -124,6 +124,7 @@ export default function AddressQuery({currentEthPrice}) {
           <table className="w-full">
             <tr className="font-semibold m-2" > <td>Tx Hash</td> <td>Date</td> <td>Eth Value</td> <td>From</td> <td>To</td>  </tr>
             { stateTransactions ? Object.entries(stateTransactions).map(item => {
+              console.log(stateTransactions)
               return (
               <tr className="border-b p-2 m-2">
                 <td className="p-2">{ item[1].hash?.substring(0,22) + "..." }</td>
