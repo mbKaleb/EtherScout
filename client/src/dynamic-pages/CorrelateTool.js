@@ -24,11 +24,11 @@ export default function CorrelateTool({currentEthPrice}) {
 
     // Wallet 1
   const [walletAddress1, setWalletAddress1] = useState('');
-    const [balance1, setBalance1] = useState(0);
+    const [balance1, setBalance1] = useState();
     const [resolver1, setResolver1] = useState({});
     // Wallet 2
   const [walletAddress2, setWalletAddress2] = useState('');
-    const [balance2, setBalance2] = useState(0);
+    const [balance2, setBalance2] = useState();
     const [resolver2, setResolver2] = useState({});
 
   // Shared State
@@ -49,6 +49,7 @@ export default function CorrelateTool({currentEthPrice}) {
   }
   //Takes an ENS and returns an formatted eth balance
   async function getBalance(nameString) {
+    console.log('ran ballance getter')
     const balance = await provider.getBalance(nameString)
     const finalBalance = await ethers.utils.formatUnits(balance, 'ether')
     return finalBalance;
@@ -73,43 +74,39 @@ export default function CorrelateTool({currentEthPrice}) {
   }
 
   const parseAddress = () => {
-    console.log(walletAddress)
-    if (walletAddress.slice(0,2) === '0x'){
-      setWalletAddress1(walletAddress.slice(0,41))
-      if (walletAddress.slice(43, 45) === '0x') {
-        setWalletAddress2(walletAddress.slice(43,-1))
+    if ( !walletAddress1 ){ 
+      if (walletAddress.slice(0,2) === '0x'){
+        setWalletAddress1(walletAddress.slice(0,41))
+        if (walletAddress.slice(43, 45) === '0x') {
+          setWalletAddress2(walletAddress.slice(43,-1))
+        }
       }
     }
-    return 0;
   }
-  // async function getData() {
-  //   //Get ENS name from hexidecimal
-  //   let resp0 = await getEthNamespace(walletAddress)
-  //   setEnsName(resp0)
+  async function getData() {
+    console.log('getting data')
+    console.log(walletAddress1, !balance1)
+    if (walletAddress1 && !balance1){
+      console.log('ran')
+      let resp = await getBalance(walletAddress1)
+      setBalance1(resp)
+      console.log(balance1)
+      console.log('set balance')
+    }
 
-  //   //Get balance of wallet
-  //   let resp1 = await getBalance(walletAddress)
-  //   setEthBalance(resp1)
+    if (walletAddress2 && !balance2) {
+      let resp = await getBalance(walletAddress2)
+      setBalance2(resp)
+    }
 
-  //   // get email 
-  //   if (resolverInstance) { //exp
-  //     let resp = await getEmailByResolver(resolverInstance)
-  //     setEmail(resp)
-  //   }
-
-  //   if (ensName && !resolverInstance) {
-  //     let resp = await resolveByName(ensName)
-  //     setResolverInstance(resp)
-  //   }
-  // }
+  }
 
 
   //On-Page-Load
   useEffect(() => {
-    // getData()
     parseAddress()
-    // getTransactionData(walletAddress)
-  }, [walletAddress]);
+    getData()
+  }, [walletAddress1, walletAddress2]);
 
 
   return (
@@ -118,8 +115,9 @@ export default function CorrelateTool({currentEthPrice}) {
       <div className="flex">
 
         <div className="grid-flex rounded-sm bg-white drop-shadow w-6/12 mr-2 p-4 ">
-          <div className="mb-2 font-medium">Wallet 1</div>
-          <div>{walletAddress1}</div>
+          <div className="font-medium">Wallet 1</div>
+          <div className="font-light mb-0">{walletAddress1}</div>
+          <div className="text-md mb-1">Ens Name</div>
           <div className="flex border-b p-1"> <div className="grow">ETH Balance: </div> <div>{walletAddress1 ? balance1 +' ETH' : "Loading..." } </div> </div>
           <div className="flex border-b p-1"> <div className="grow">USD Est. Value: </div> <div>{walletAddress1 ? "$"+(Math.round((balance1 * currentEthPrice) * 100) / 100).toFixed(2) : "Loading..."}</div></div>
           <div className="flex border-b p-1"> <div className="grow">Wallet Type</div> <div>Unknown</div> </div>
@@ -127,7 +125,8 @@ export default function CorrelateTool({currentEthPrice}) {
 
         <div className="grid-flex rounded-sm bg-white drop-shadow w-6/12 ml-2 p-4 ">
           <div className="mb font-medium">Wallet 2</div>
-          <div>{walletAddress2}</div>
+          <div className="font-light mb-0">{walletAddress2}</div>
+          <div className="text-md mb-1">Ens Name</div>
           <div className="flex border-b p-1"> <div className="grow">ETH Balance: </div> <div>{walletAddress2 ? balance2 +' ETH' : "Loading..." }</div> </div>
           <div className="flex border-b p-1"> <div className="grow">USD Est. Value: </div> <div>{walletAddress2 ? "$"+(Math.round((balance2*currentEthPrice) * 100) / 100).toFixed(2) : "Loading..."}</div></div>
           <div className="flex border-b p-1"> <div className="grow">Wallet Type</div> <div>Unknown</div> </div>
@@ -161,3 +160,22 @@ export default function CorrelateTool({currentEthPrice}) {
     </div>
   )
 }
+
+
+// let resp0 = await getEthNamespace(walletAddress)
+// setEnsName(resp0)
+
+// //Get balance of wallet
+// let resp1 = await getBalance(walletAddress)
+// setEthBalance(resp1)
+
+// // get email 
+// if (resolverInstance) { //exp
+//   let resp = await getEmailByResolver(resolverInstance)
+//   setEmail(resp)
+// }
+
+// if (ensName && !resolverInstance) {
+//   let resp = await resolveByName(ensName)
+//   setResolverInstance(resp)
+// }
