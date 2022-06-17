@@ -18,8 +18,7 @@ export default function TransactionScannerTool({currentEthPrice}) {
 
   //State Assignment
     //Basic Transaction Data
-    
-
+    const [transactionInstance, setTransactionInstance] = useState({})
 
     //Ether Network and key
   const network = 'homestead';
@@ -27,38 +26,34 @@ export default function TransactionScannerTool({currentEthPrice}) {
     etherscan: ETHERSCANKEY,
   });
 
+  const transaction = () => {
+
+  }
+
   //Async Hook Assignment
     //Returns the name associated with a hexidecimal address if reverse lookup is enabled
   async function getEthNamespace(hexidecimalAddress) {
     const nameString = await provider.lookupAddress(hexidecimalAddress);
     return nameString;
   }
-    //Takes an ENS and returns an formatted eth balance
-  async function getBalance(nameString) {
-    const balance = await provider.getBalance(nameString)
-    const finalBalance = await ethers.utils.formatUnits(balance, 'ether')
-    return finalBalance;
-  }
-    //Get resolver ens contract resolver by name
-  async function resolveByName(address) {
-      const resolver = await provider.getResolver(address)
-      return resolver
-  }
 
-  async function getEmailByResolver(resolver) {
-    const email = await resolver.getText('email');
-    return email
+  async function getTransaction(txHash) {
+    const response = await provider.getTransaction(txHash)
+    console.log(response)
+    
+    return response
   }
-
 
   async function getData() {
-    
+    getTransaction(transactionHash).then(r => (setTransactionInstance(r)))
+
   }
 
 
   //On-Page-Load
   useEffect(() => {
-    
+    getData()
+    console.log(transactionInstance)
   }, []);
 
   return (
@@ -67,9 +62,9 @@ export default function TransactionScannerTool({currentEthPrice}) {
       <div className="flex mt-2">
         <div className="grid-flex rounded-sm bg-white drop-shadow w-full p-4 ">
           <div className="mb-2 font-medium">Overview</div>
-          <div className="flex border-b p-1"> <div className="grow">Status</div>   <div ></div> </div>
-          <div className="flex border-b p-1"> <div className="grow">Block</div>   <div ></div></div>
-          <div className="flex border-b p-1"> <div className="grow">Timestamp</div>   <div>Unknown</div> </div>
+          <div className="flex border-b p-1"> <div className="grow font-semibold">Status:  </div><div className="min-w-1/2">{transactionInstance.confirmations ? `Success, Confirmations: ${transactionInstance.confirmations}` : 'failed'}</div> </div>
+          <div className="flex border-b p-1"> <div className="grow">Block: </div>   <div ></div></div>
+          <div className="flex border-b p-1"> <div className="grow">Timestamp:</div>   <div>Unknown</div> </div>
         </div>
        
       </div>
