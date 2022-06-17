@@ -13,8 +13,6 @@ export default function Correlate() {
   const initialForm1State = {wallet: 1}
   const initialForm2State = {wallet: 2}
 
-  const [isFormVisible, setisFormVisible] = useState(true)
-
     // Explicit Form State
   const [form1State, setForm1State] = useState(initialForm1State)
   const [optionSelector1, setOptionSelector1] = useState("hexidecimal");

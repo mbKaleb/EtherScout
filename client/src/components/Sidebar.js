@@ -39,11 +39,12 @@ export default function Sidebar({ isSidebarActive, currentUser, toggleSidebar, t
       return (
       <div className='computed:( h-fit z-40 absolute top-1 left-44 w-48 ) style:( bg-gray-100 outline outline-2 outline-gray-100 rounded-sm drop-shadow-xl )'>
         <button className={blueButton} name={'/'} onClick={toggleSidebar} >{buttonTextContent}</button>
-        { (buttonTextContent == 'Technologies') ? null : (<button className={blueButton} name={'/technologies'} onClick={navigateHandler} >Technologies</button>) }
+        { (buttonTextContent === 'Technologies') ? null : (<button className={blueButton} name={'/technologies'} onClick={navigateHandler} >Technologies</button>) }
         <input className="border border-black rounded-sm text-lg font-light outline-gray-600 ml-2 w-11/12 my-1 " placeholder="Filter Tools" />
         <div className="border m-1" />
-        { (buttonTextContent == 'Address Query' ) ? null : (<button className={blueButton} name={'/address-query'} onClick={navigateHandler} >Address Query</button>) }
-        { (buttonTextContent == 'Correlate' ) ? null : (<button className={blueButton} name={'/correlate'} onClick={navigateHandler} >Correlate</button>) }
+        { (buttonTextContent === 'Address Query' ) ? null : (<button className={blueButton} name={'/address-query'} onClick={navigateHandler} >Address Query</button>) }
+        { (buttonTextContent === 'Address Query' ) ? null : (<button className={blueButton} name={'/transaction-scanner'} onClick={navigateHandler} >Transaction Scanner</button>) }
+        { (buttonTextContent === 'Correlate' ) ? null : (<button className={blueButton} name={'/correlate'} onClick={navigateHandler} >Correlate</button>) }
       </div> )
     } else {
       return (

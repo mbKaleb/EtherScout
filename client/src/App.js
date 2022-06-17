@@ -14,6 +14,9 @@ import AddressQueryTool from "./dynamic-pages/AddressQueryTool";
 import Correlate from "./pages/Correlate";
 import CorrelateTool from "./dynamic-pages/CorrelateTool";
 
+import TransactionScanner from "./pages/TransactionScanner";
+import TransactionScannerTool from "./dynamic-pages/TransactionScannerTool";
+
 import LogIn from "./pages/LogIn";
 import SignUp from "./pages/SignUp";
 
@@ -54,6 +57,7 @@ export default function App() {
   //     }
   //   }).then(r => r.json()).then(console.log)
   // }
+
   const getLatestEthPrice = () => {
     fetch(`https://api.etherscan.io/api?module=stats&action=ethprice&apikey=${ETHERSCANKEY}`)
     .then(res => res.json()).then(res => setCurrentEthPrice(res.result.ethusd))
@@ -79,6 +83,10 @@ export default function App() {
 
           <Route path="correlate" element={<Correlate />} >
             <Route path=':walletAddress' element={<CorrelateTool currentEthPrice={currentEthPrice}/>} />
+          </Route>
+
+          <Route path="transaction-scanner" element={<TransactionScanner />}>
+            <Route path=':transactionHash' element={<TransactionScannerTool currentEthPrice={currentEthPrice}/>} />
           </Route>
 
           <Route path="login" element={<LogIn setCurrentUser={setCurrentUser} />} />    {/*login Wallets*/}

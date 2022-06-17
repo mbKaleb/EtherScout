@@ -7,8 +7,6 @@ import { useNavigate, Outlet } from "react-router-dom";
 import { PageStyles } from "../hooks/Styles";
 
 
-
-
 export default function AddressQuery() {
 
   //Hook Assignment
