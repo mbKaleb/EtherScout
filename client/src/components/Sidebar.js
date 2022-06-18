@@ -1,4 +1,3 @@
-
 //The sidebar component is a hideable set of buttons on the side to navigate to different pages//
 
 import { useNavigate } from "react-router-dom"
@@ -23,8 +22,6 @@ export default function Sidebar({ isSidebarActive, currentUser, toggleSidebar, t
     navigate(e.target.name)
     toggleSidebar()
     textContentHandler(e.target.textContent)
-    // textContentHandler(e.target.textCont)
-    
   }
   const navigateAuthorizedUser = (e) => {
     if (isLoggedIn) {
@@ -43,7 +40,7 @@ export default function Sidebar({ isSidebarActive, currentUser, toggleSidebar, t
         <input className="border border-black rounded-sm text-lg font-light outline-gray-600 ml-2 w-11/12 my-1 " placeholder="Filter Tools" />
         <div className="border m-1" />
         { (buttonTextContent === 'Address Query' ) ? null : (<button className={blueButton} name={'/address-query'} onClick={navigateHandler} >Address Query</button>) }
-        { (buttonTextContent === 'Address Query' ) ? null : (<button className={blueButton} name={'/transaction-scanner'} onClick={navigateHandler} >Transaction Scanner</button>) }
+        { (buttonTextContent === 'Transaction Scanner' ) ? null : (<button className={blueButton} name={'/transaction-scanner'} onClick={navigateHandler} >Transaction Scanner</button>) }
         { (buttonTextContent === 'Correlate' ) ? null : (<button className={blueButton} name={'/correlate'} onClick={navigateHandler} >Correlate</button>) }
       </div> )
     } else {

@@ -15,6 +15,7 @@
 bundle install
 rails db:create
 npm install --prefix client
+sudo service postgresql start
 ```
 
 You can use the following commands to run the application:

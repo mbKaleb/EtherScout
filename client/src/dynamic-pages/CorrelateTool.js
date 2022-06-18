@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom"
 
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai'
-import { SiIterm2, SiMomenteo } from "react-icons/si";
 
 //Ethers Imports
 import { ethers } from "ethers";
@@ -63,11 +62,6 @@ export default function CorrelateTool({currentEthPrice}) {
       return resolver
   }
 
-  //Get email by resolver
-  async function getEmailByResolver(resolver) {
-    const email = await resolver.getText('email');
-    return email
-  }
   //get transaction data
   async function getTransactionData(address) {
     const response = await fetch(allTransactions(address, ETHERSCANKEY) )
@@ -151,7 +145,7 @@ export default function CorrelateTool({currentEthPrice}) {
           <div className="font-light mb-0">{walletAddress2}</div>
           <div className="text-md mb-1">{ensName2 ? ensName2 : 'No Record'}</div>
           <div className="flex border-b p-1"> <div className="grow">ETH Balance: </div> <div>{balance2 ? balance2 +' ETH' : "Loading..." }</div> </div>
-          <div className="flex border-b p-1"> <div className="grow">USD Est. Value: </div> <div>{balance2 ? "$"+(Math.round((balance2*currentEthPrice) * 100) / 100).toFixed(2) : "Loading..."}</div></div>
+          <div className="flex border-b p-1"> <div className="grow">USD Est. Value: </div> <div>{balance2 ? "$"+(Math.round((balance2 * currentEthPrice) * 100) / 100).toFixed(2) : "Loading..."}</div></div>
           <div className="flex border-b p-1"> <div className="grow">Wallet Type</div> <div>Unknown</div> </div>
         </div>
 
