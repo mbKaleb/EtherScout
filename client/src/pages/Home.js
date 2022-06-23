@@ -4,30 +4,42 @@ import { useState, useEffect } from "react"
 
 //Component Imports
 
+//Hooks
+import { gasOracle } from "../hooks/endpoints";
+
+import { ETHERSCANKEY } from "../keys";
+
 //Styles
 import { PageStyles } from "../hooks/Styles"
 
 
 export default function Home({ currentEthPrice }) {
 
+  //State
   const [ethValue, setEthValue] = useState(0);
-  
-  
+  const [oracleIns, setOracleIns] = useState()
 
+
+  //Fetch assignemtn
+  async function getOracle() {
+    const res = await (await fetch(gasOracle(ETHERSCANKEY))).json()
+    return res.result 
+  }
+
+
+  //Effects
   useEffect(() => {
     setEthValue(Math.round((currentEthPrice) * 100) / 100);
   }, [currentEthPrice])
-  
+
+
   useEffect(() => {
-    
-    
+    getOracle().then(setOracleIns)
   }, [])
-  
-  
+  console.log(oracleIns)
 
   //Local State
-  const [currentUser] = useOutletContext();
-  
+  // const [currentUser] = useOutletContext();
 
   return (
     <div className='-z-50 -top-4 bg-gray-300 min-w-fit'>
@@ -51,15 +63,15 @@ export default function Home({ currentEthPrice }) {
               </tr>
               <tr>
                 <td>${ethValue?ethValue:null} </td>
+                {/* <td>{oracleIns?oracleIns:null}</td> */}
+
               </tr>
             </table>
           </div>
         </div>
-        <div className="bg-white outline outline-1 rounded-sm min-w-md w-8/12 m-4 float-left jjustify-self-start p-8 h-custom"></div>
+        <div className="bg-white outline outline-1 rounded-sm min-w-md w-8/12 m-4 float-left p-8 h-custom"></div>
       </div>
     
     </div>
   )
 }
-
-// Hello {currentUser ? currentUser.username : 'user'}

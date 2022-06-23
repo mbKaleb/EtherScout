@@ -3,12 +3,6 @@
 import { useState } from 'react';
 import { useNavigate, Outlet } from 'react-router-dom'
 
-//Icons
-import { BsStack } from 'react-icons/bs';
-import { FaReact } from 'react-icons/fa';
-import { FaEthereum } from 'react-icons/fa';
-import { SiTailwindcss } from 'react-icons/si';
-
 //Components
 import Sidebar from '../components/Sidebar';
 
@@ -104,9 +98,3 @@ export default function ParentPage({ currentUser, setCurrentUser, currentEthPric
     </div>
   )
 }
-
-
-{/* Saved for later
-<button className='flex text-justify  w-fit' onClick={navigateReact}>{<FaReact className='m-1' style={{ color: "blue" }} />}React{<FaReact className='m-1' style={{ color: "blue" }} />}</button>
-<button className='flex text-justify  w-fit' onClick={navigateEthersJs}>{<FaEthereum className='m-1' />}EthersJS{<FaEthereum className='m-1' />}</button>
-<button className='flex text-justify  w-fit' onClick={navigateTailwind}>{<SiTailwindcss className='m-1' style={{ color: ' #57bfff' }} />}Tailwind{<SiTailwindcss className='m-1' style={{ color: ' #57bfff' }} />}</button> */}
