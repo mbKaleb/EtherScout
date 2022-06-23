@@ -104,10 +104,10 @@ export default function TransactionScannerTool({currentEthPrice}) {
       <div className="flex mt-2">
         <div className="grid-flex rounded-sm bg-white drop-shadow w-full p-4">
           <div className="mb-2 font-semibold">Overview</div>
-          <div className="flex border-b p-1"> <div className="grow font-">Status:</div> <div className="w-1/3 mr-44">{transactionInstance ? `Success, Confirmations: ${transactionInstance.confirmations}` : 'Loading...'}</div> </div>
-          <div className="flex border-b p-1"> <div className="grow font-">Block: </div> <div className="w-1/3 mr-44">{transactionInstance ? transactionInstance.blockNumber : null}</div> </div>
-          <div className="flex border-b p-1"> <div className="grow font-">Timestamp:</div> <div className="w-1/3 mr-44">{blockTimestamp ? blockTimestamp : 'null'}</div> </div>
-          <div className="flex border-b p-1"> <div className="grow font-">Value:</div> <div className="w-1/3 mr-44">{transactionInstance ? `${formattedEthValue} Eth` : 'Loading...'}</div> </div>
+          <div className="flex border-b p-1"> <div className="grow">Status:</div> <div className="w-1/3 mr-44">{transactionInstance ? `Success, Confirmations: ${transactionInstance.confirmations}` : 'Loading...'}</div> </div>
+          <div className="flex border-b p-1"> <div className="grow">Block: </div> <div className="w-1/3 mr-44">{transactionInstance ? transactionInstance.blockNumber : null}</div> </div>
+          <div className="flex border-b p-1"> <div className="grow">Timestamp:</div> <div className="w-1/3 mr-44">{blockTimestamp ? blockTimestamp : 'null'}</div> </div>
+          <div className="flex border-b p-1"> <div className="grow">Value:</div> <div className="w-1/3 mr-44">{transactionInstance ? `${formattedEthValue} Eth` : 'Loading...'}</div> </div>
         </div>
       </div>
 
@@ -119,8 +119,8 @@ export default function TransactionScannerTool({currentEthPrice}) {
 
       <div className="rounded-sm bg-white drop-shadow w-full mt-3 p-4 ">
         <div className="mb-2 border-b text-medium font-semibold ">Gas & Fees</div>
-          <div className="flex border-b p-1"> <div className="grow font-">Gas Used</div> <div className="w-1/3 mr-44"> {transactionInstance ? `${formattedGasUsed} Gwei, (${(formattedGasUsed / formattedGasLimit).toFixed(2) * 100}%)` : 'Loading...' }</div> </div>
-          <div className="flex border-b p-1"> <div className="grow font-">Gas Limit</div> <div className="w-1/3 mr-44"> {transactionInstance ? `${formattedGasLimit} Gwei` : 'Loading...' }</div> </div>
+          <div className="flex border-b p-1"> <div className="grow">Gas Used</div> <div className="w-1/3 mr-44"> {transactionInstance ? `${formattedGasUsed} Gwei, (${(formattedGasUsed / formattedGasLimit).toFixed(2) * 100}%)` : 'Loading...' }</div> </div>
+          <div className="flex border-b p-1"> <div className="grow">Gas Limit</div> <div className="w-1/3 mr-44"> {transactionInstance ? `${formattedGasLimit} Gwei` : 'Loading...' }</div> </div>
       </div>
       
     </div>
