@@ -74,7 +74,7 @@ export default function App() {
     <Router>
       <Routes>
         <Route path="/" element={<ParentPage currentUser={currentUser} setCurrentUser={setCurrentUser} currentEthPrice={currentEthPrice} />}> {/*Parent Route/Source */}
-          <Route path="" element={<Home />} />                          {/*Home Page*/}
+          <Route path="" element={<Home currentEthPrice={currentEthPrice}/>} />                          {/*Home Page*/}
           <Route path="technologies" element={<Technologies />} />      {/*Technologies*/}
 
           <Route path="address-query" element={<AddressQuery />} >                                       {/*Wallet Finder*/}

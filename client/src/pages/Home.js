@@ -1,5 +1,6 @@
 //React Imports
 import { useOutletContext } from "react-router-dom"
+import { useState, useEffect } from "react"
 
 //Component Imports
 
@@ -9,9 +10,25 @@ import { PageStyles } from "../hooks/Styles"
 
 export default function Home({ currentEthPrice }) {
 
+  const [ethValue, setEthValue] = useState(0);
+  
+  
+
+  useEffect(() => {
+    setEthValue(Math.round((currentEthPrice) * 100) / 100);
+  }, [currentEthPrice])
+  
+  useEffect(() => {
+    
+    
+  }, [])
+  
+  
+
   //Local State
   const [currentUser] = useOutletContext();
-  console.log(currentUser)
+  
+
   return (
     <div className='-z-50 -top-4 bg-gray-300 min-w-fit'>
       <div className="flex justify-center w-screen h-44 bg-blue-800">
@@ -20,17 +37,20 @@ export default function Home({ currentEthPrice }) {
           <div>To get started, click the toolbar in the top left, and select a tool.</div>
         </div>
       </div>
-      
+
       <div className="w-screen bg-">
         <div className="flex justify-center">
-          <div className="bg-white outline outline-1 rounded-sm w-2/3 m-2 p-4 h-custom grid-flex" >Hello {currentUser ? currentUser.username : 'user'}
-            <table>
-              <tr>
-                <td>Ether Price</td>
-                <td>Transactions</td>
+          <div className="bg-white outline outline-1 rounded-sm w-2/3 m-2 p-4 h-custom grid-flex" >
+            <table className="w-full bg-">
+              <tr className="font-light text-sm">
+                <td>Ether Price      </td>
+                <td>Gas Price        </td>
+                <td>Market Cap       </td>
+                <td>Transactions     </td>
+                <td>Mining Difficulty</td>
               </tr>
               <tr>
-                <td>$ {currentEthPrice} </td>
+                <td>${ethValue?ethValue:null} </td>
               </tr>
             </table>
           </div>
@@ -41,3 +61,5 @@ export default function Home({ currentEthPrice }) {
     </div>
   )
 }
+
+// Hello {currentUser ? currentUser.username : 'user'}
