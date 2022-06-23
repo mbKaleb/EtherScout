@@ -7,7 +7,7 @@ export default function Technologies() {
 
   return (
     <div className='flex justify-center -z-50 -top-4 bg-gray-200 h-fit'>
-      <div className="bg-white outline outline-1 rounded-sm min-w-md w-8/12 m-4 p-8 h-custom ">
+      <div className="bg-white outline outline-1 rounded-sm min-w-md w-8/12 m-4 p-8 h-custom">
 
         <div className="border-b text-xl  ">Technologies</div>
         <div className="mb-4 ml-1" >The libraries, frameworks and APIs utilzied in this project. </div>

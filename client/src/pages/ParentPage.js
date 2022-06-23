@@ -82,7 +82,7 @@ export default function ParentPage({ currentUser, setCurrentUser, currentEthPric
 
   return (
     <div className='bg-gray-200 h-screen'>
-      <div className='bg-gray-100 p-2 top-11 w-full sticky top-0 outline outline-blue-700 z-50 h-12 flex'>
+      <div className='bg-gray-100 p-2 top-11 w-full sticky top-0 outline outline-blue-800 z-50 h-12 flex'>
         <button className={logoStyles} onClick={navigateHome} >EtherScout</button>
         <button className={dropDownButtonStyles} onClick={toggleSidebar}>{buttonTextContent}</button>
         <div className='grow'></div>

@@ -96,12 +96,11 @@ export default function TransactionScannerTool({currentEthPrice}) {
   //On-Page-Load
   useEffect(() => {
     getData()
-    
   }, [transactionInstance]);
 
   return (
     <div className="justify-center rounded-1 bg-gray-200 w-10/12 p-3 min-w-fit">
-      <div className="Address flex rounded-sm bg-white drop-shadow p-2"> <div className="mr-4 font-bold">Transaction Hash:</div> <div className="">{transactionHash}</div> </div>
+      <div className="Address flex rounded-sm bg-white drop-shadow p-2"> <div className="mr-4 font-bold">Transaction Hash:</div> <div>{transactionHash}</div> </div>
       <div className="flex mt-2">
         <div className="grid-flex rounded-sm bg-white drop-shadow w-full p-4">
           <div className="mb-2 font-semibold">Overview</div>
@@ -122,8 +121,6 @@ export default function TransactionScannerTool({currentEthPrice}) {
         <div className="mb-2 border-b text-medium font-semibold ">Gas & Fees</div>
           <div className="flex border-b p-1"> <div className="grow font-">Gas Used</div> <div className="w-1/3 mr-44"> {transactionInstance ? `${formattedGasUsed} Gwei, (${(formattedGasUsed / formattedGasLimit).toFixed(2) * 100}%)` : 'Loading...' }</div> </div>
           <div className="flex border-b p-1"> <div className="grow font-">Gas Limit</div> <div className="w-1/3 mr-44"> {transactionInstance ? `${formattedGasLimit} Gwei` : 'Loading...' }</div> </div>
-        <div className="flex border-b p-1"> <div className="grow">item:</div> <div className="w-1/3 mr-44">{'data'}</div> </div>
-        <div className="flex border-b p-1"> <div className="grow">item:</div> <div className="w-1/3 mr-44">{'data'}</div> </div>
       </div>
       
     </div>
