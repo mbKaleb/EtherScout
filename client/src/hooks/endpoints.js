@@ -5,3 +5,11 @@ export const allTransactions = (address, key) => {
 export const gasOracle = (key) => {
     return `https://api.etherscan.io/api?module=gastracker&action=gasoracle&apikey=${key}`
 }
+
+export const ether2Supply = (key) => {
+    return `https://api.etherscan.io/api?module=stats&action=ethsupply&apikey=${key}`
+}
+
+export const etherNodeSize = (key) => {
+    return `https://api.etherscan.io/api?module=stats&action=chainsize&startdate=2019-02-01&enddate=2019-02-28&clienttype=geth&syncmode=default&sort=asc&apikey=${key}`
+}

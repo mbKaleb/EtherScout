@@ -74,10 +74,10 @@ export default function App() {
     <Router>
       <Routes>
         <Route path="/" element={<ParentPage currentUser={currentUser} setCurrentUser={setCurrentUser} currentEthPrice={currentEthPrice} />}> {/*Parent Route/Source */}
-          <Route path="" element={<Home currentEthPrice={currentEthPrice}/>} />                          {/*Home Page*/}
-          <Route path="technologies" element={<Technologies />} />      {/*Technologies*/}
+          <Route path="" element={<Home currentEthPrice={currentEthPrice}/>} /> {/*Home Page*/}
+          <Route path="technologies" element={<Technologies />} /> {/*Technologies*/}
 
-          <Route path="address-query" element={<AddressQuery />} >                                       {/*Wallet Finder*/}
+          <Route path="address-query" element={<AddressQuery />} > {/*Wallet Finder*/}
             <Route path=':walletAddress' element={<AddressQueryTool currentEthPrice={currentEthPrice}/>} />  {/**/}
           </Route>
 
@@ -89,7 +89,7 @@ export default function App() {
             <Route path=':transactionHash' element={<TransactionScannerTool currentEthPrice={currentEthPrice}/>} />
           </Route>
 
-          <Route path="login" element={<LogIn setCurrentUser={setCurrentUser} />} />    {/*login Wallets*/}
+          <Route path="login" element={<LogIn setCurrentUser={setCurrentUser} />} /> {/*login Wallets*/}
           <Route path="/signup" element={<SignUp setCurrentUser={setCurrentUser} />} /> {/*sign up Wallets*/}
 
           <Route path="*" element={<PageNotFound />} /> {/*Page-not-found display/redirect*/}

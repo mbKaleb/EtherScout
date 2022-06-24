@@ -8,7 +8,7 @@ export default function WhaleCard({wallet, currentEthPrice}) {
   const [walletBalance, setWalletBalance] = useState()
 
   //Styles
-  const boldFont = "font-semibold flex m-1 " //Wrapper element
+  const boldFont = "font-semibold flex m-1 border-b " //Wrapper element
   const normalFont = "font-normal flex mx-1"
 
   const url = `https://api.etherscan.io/api?module=account&action=balance&address=${wallet.wallet_address}&tag=latest&apikey=${ETHERSCANKEY}`
@@ -30,7 +30,7 @@ export default function WhaleCard({wallet, currentEthPrice}) {
   }, [])
   
     return (
-      <div className="bg-white outline outline-1 outline-purple-700 rounded m-1 p-2">
+      <div className="bg-white border-gray-400 border p-2 min-w-fit w-5/6">
       <div className={boldFont} >Alias:   <div className={normalFont} >{wallet? wallet.alias: null}</div> </div>
       <div className={boldFont} >Address: <div className={normalFont} >{wallet? wallet.wallet_address: null}</div> </div>
       <div className={boldFont} >Balance: <div className={normalFont} >{walletBalance? Math.floor(formatedEthBalance()) +" ETH": "Loading..."}</div> </div>
