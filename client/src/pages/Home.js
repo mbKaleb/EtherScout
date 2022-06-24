@@ -101,16 +101,20 @@ export default function Home({ currentEthPrice }) {
             </table>
           </div>
         </div>
-
-        <label>Whale Whallets</label>
-        <div className="h-fit grid grid-cols-2 gap-4 ml-64  min-w-fit">
-          {whales.map(whale => {
-            return (<WhaleCard wallet={whale} currentEthPrice={currentEthPrice} />)
-          })}
+        <div className="w-screen flex justify-center">
+          <div className="w-5/6 bg-white outline outline-1 p-2 mt-10 rounded-sm">
+            <div className="rounded-sm border-b font-semibold">Large Wallets</div>
+            <div className="rounded-sm text-sm">These wallets are big players in the crypto space, keeping tabs on them can <a href="https://www.xtb.com/int/market-analysis/news-and-research/the-fall-of-the-terra-luna" className="text-blue-600 underline">seriously</a> mean the difference when it comes to your portfolio. </div>
+          </div>
         </div>
-
+        <div className="w-screen flex justify-center">
+          <div className="w-5/6 h-fit grid grid-cols-2 gap-3  min-w-fit mt-2">
+            {whales.map(whale => {
+              return (<WhaleCard wallet={whale} currentEthPrice={currentEthPrice} />)
+            })}
+          </div>
+        </div>
       </div>
-    
     </div>
   )
 }

@@ -30,7 +30,7 @@ export default function WhaleCard({wallet, currentEthPrice}) {
   }, [])
   
     return (
-      <div className="bg-white border-gray-400 border p-2 min-w-fit w-5/6">
+      <div className="bg-white border-gray-400 border p-2 min-w-fit">
       <div className={boldFont} >Alias:   <div className={normalFont} >{wallet? wallet.alias: null}</div> </div>
       <div className={boldFont} >Address: <div className={normalFont} >{wallet? wallet.wallet_address: null}</div> </div>
       <div className={boldFont} >Balance: <div className={normalFont} >{walletBalance? Math.floor(formatedEthBalance()) +" ETH": "Loading..."}</div> </div>
