@@ -67,6 +67,7 @@ export default function CorrelateTool({currentEthPrice}) {
     const response = await fetch(allTransactions(address, ETHERSCANKEY) )
       if (response.ok) {
         const transactions = await response.json();
+        console.log(transactions)
         setTransactions(transactions.result)
       }
   }
