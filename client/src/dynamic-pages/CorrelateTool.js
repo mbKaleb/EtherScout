@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 //React Imports
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom"
@@ -10,7 +11,6 @@ import { ethers } from "ethers";
 //Hooks
 import { allTransactions } from "../hooks/endpoints";
 import { ETHERSCANKEY } from "../keys";
-
 
 
 
@@ -122,6 +122,7 @@ export default function CorrelateTool({currentEthPrice}) {
   useEffect(() => {
     parseAddress()
     getData()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [walletAddress1, walletAddress2]);
 
 
