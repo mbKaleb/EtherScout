@@ -71,15 +71,12 @@ export default function CorrelateTool({currentEthPrice}) {
   }
 
   const parseAddress = () => {
-    console.log('ran parse Address')
     if ( !walletAddress1 ){
       if (walletAddress.slice(0,2) === '0x'){
         setWalletAddress1(walletAddress.slice(0,42))
         if (walletAddress.slice(43, 45) === '0x') {
-          console.log('ran seccond operation')
           let substring = walletAddress.slice(43);
           substring = substring.replace(/\s/g, '');
-          console.log(new Array(substring))
           setWalletAddress2(substring);
         }
       }
@@ -163,16 +160,15 @@ export default function CorrelateTool({currentEthPrice}) {
             <tbody className="justify-items-center">
               { stateTransactions ? Object.entries(stateTransactions).map(item => {
                 if( (walletAddress2.toLowerCase() === item[1].to || walletAddress2.toLowerCase() === item[1].from) ){
-                  console.log('success')
                   return (
                   <tr className="border-b p-2 m-2">
-                    <td className="">{ item[1].hash?.substring(0,22) + "..." }</td> 
+                    <td>{ item[1].hash}</td>              {/*Transaction Hash*/}
                     <td>{ (new Date(item[1].timeStamp * 1000).toString().substring(3,16)) }</td> {/*Date/Timestamp*/}
-                    <td>{ ensName1 ? ensName1 : walletAddress1.substring(0,22) + "..." }</td> {/* First wallet*/}
-                    <div className="inline-flex items-baseline">
-                      { (walletAddress2.toLowerCase() === item[1].from) ? <AiOutlineArrowLeft className="pt-1"/> : null}
-                      <td>{ (Math.round((item[1].value) ) / 1000000000000000000 ).toFixed(2) } Eth</td>
-                      { (walletAddress2.toLowerCase() === item[1].to) ?  <AiOutlineArrowRight className="pt-1"/> : null}
+                    <td>{ ensName1 ? ensName1 : walletAddress1.substring(0,22) + "..." }</td>    {/* First wallet*/}
+                    <div className="inline-flex items-baseline"> 
+                      { (walletAddress2.toLowerCase() === item[1].from) ? <AiOutlineArrowLeft className="pt-1"/> : null }
+                      <td>{ (Math.round((item[1].value) ) / 1000000000000000000 ).toFixed(2) } Eth </td> {/*Ether Value of transaction*/}
+                      { (walletAddress2.toLowerCase() === item[1].to) ?  <AiOutlineArrowRight className="pt-1"/> : null }
                     </div>
                     <td>{ ensName2 ? ensName2 : walletAddress2.substring(0,22)  + "..." }</td>
                   </tr> )
