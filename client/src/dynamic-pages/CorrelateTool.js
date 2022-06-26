@@ -43,7 +43,6 @@ export default function CorrelateTool({currentEthPrice}) {
   });
 
   //Async Hook Assignment
-
   //Returns the name associated with a hexidecimal address if reverse lookup is enabled
   async function reverseLookup(hexidecimalAddress) {
     const nameString = await provider.lookupAddress(hexidecimalAddress);
@@ -67,24 +66,27 @@ export default function CorrelateTool({currentEthPrice}) {
     const response = await fetch(allTransactions(address, ETHERSCANKEY) )
       if (response.ok) {
         const transactions = await response.json();
-        console.log(transactions)
         setTransactions(transactions.result)
       }
   }
 
   const parseAddress = () => {
+    console.log('ran parse Address')
     if ( !walletAddress1 ){
       if (walletAddress.slice(0,2) === '0x'){
         setWalletAddress1(walletAddress.slice(0,42))
         if (walletAddress.slice(43, 45) === '0x') {
-          setWalletAddress2(walletAddress.slice(43))
+          console.log('ran seccond operation')
+          let substring = walletAddress.slice(43);
+          substring = substring.replace(/\s/g, '');
+          console.log(new Array(substring))
+          setWalletAddress2(substring);
         }
       }
     }
   }
-  
-  async function getData() {
 
+  async function getData() {
     //Balances
     if (walletAddress1 && !balance1){
       let resp = await getBalance(walletAddress1)
@@ -123,7 +125,6 @@ export default function CorrelateTool({currentEthPrice}) {
   useEffect(() => {
     parseAddress()
     getData()
-
   }, [walletAddress1, walletAddress2]);
 
 
@@ -160,21 +161,21 @@ export default function CorrelateTool({currentEthPrice}) {
               <tr className="font-semibold m-1 " ><td>Tx Hash</td><td>Date</td><td>Wallet 1</td><td className="pl-4">Ether</td><td className="">Wallet 2</td></tr>
             </thead>
             <tbody className="justify-items-center">
-              { stateTransactions ? Object.entries(stateTransactions).map(item => {
-                if(walletAddress2 === (item[1].to || item[1].from) ){
-                  console.log(item)
+              { stateTransactions ? Object.entries(stateTransactions).map(item => {                
+                if( (walletAddress2.toLowerCase() === item[1].to || walletAddress2.toLowerCase() === item[1].from) ){
+                  console.log('success')
                   return (
-                    <tr className="border-b p-2 m-2">
-                  <td className="">{ item[1].hash?.substring(0,22) + "..." }</td>
-                  <td>{ (new Date(item[1].timeStamp * 1000).toString().substring(3,16)) }</td>
-                  <td>{ ensName1 ? ensName1 : walletAddress1.substring(0,22) + "..." }</td> {/* First wallet*/}
-                  <div className="inline-flex items-baseline">
-                    {(walletAddress2 === item[1].from) ? <AiOutlineArrowLeft className="pt-1"/> : null}
-                    <td>{ (Math.round((item[1].value) ) / 1000000000000000000 ).toFixed(2) } Eth</td>
-                    {(walletAddress2 === item[1].to) ?  <AiOutlineArrowRight className="pt-1"/> : null}
-                  </div>
-                  <td>{ ensName2 ? ensName2 : walletAddress2.substring(0,22)  + "..." }</td>
-                </tr> )
+                  <tr className="border-b p-2 m-2">
+                    <td className="">{ item[1].hash?.substring(0,22) + "..." }</td>
+                    <td>{ (new Date(item[1].timeStamp * 1000).toString().substring(3,16)) }</td>
+                    <td>{ ensName1 ? ensName1 : walletAddress1.substring(0,22) + "..." }</td> {/* First wallet*/}
+                    <div className="inline-flex items-baseline">
+                      {(walletAddress2 === item[1].from) ? <AiOutlineArrowLeft className="pt-1"/> : null}
+                      <td>{ (Math.round((item[1].value) ) / 1000000000000000000 ).toFixed(2) } Eth</td>
+                      {(walletAddress2 === item[1].to) ?  <AiOutlineArrowRight className="pt-1"/> : null}
+                    </div>
+                    <td>{ ensName2 ? ensName2 : walletAddress2.substring(0,22)  + "..." }</td>
+                  </tr> )
                 }
             }) : null }
             </tbody>
