@@ -102,7 +102,7 @@ export default function Home({ currentEthPrice }) {
           </div>
         </div>
         <div className="w-screen flex justify-center">
-          <div className="w-5/6 bg-white outline outline-1 p-2 mt-10 rounded-sm">
+          <div className="w-5/6 bg-white outline outline-1 outline-gray-600 p-2 mt-10 rounded-sm">
             <div className="rounded-sm border-b font-semibold">Large Wallets</div>
             <div className="rounded-sm text-sm">These wallets are big players in the crypto space, keeping tabs on them can <a href="https://www.xtb.com/int/market-analysis/news-and-research/the-fall-of-the-terra-luna" className="text-blue-600 underline">seriously</a> mean the difference when it comes to your portfolio. </div>
           </div>
